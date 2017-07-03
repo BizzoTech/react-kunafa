@@ -18,7 +18,7 @@ export default config => {
 
 	const AppStore = createStore(AppReducer, AppMiddleware);
 
-	setInterval(async() => {
+	setInterval(() => {
 		const hasLocalEvents = R.values(AppStore.getState().events).some(R.prop('localOnly'));
 		const isProcessing = AppStore.getState().processing_local.isProcessing;
 		const isConnected = navigator.onLine;
