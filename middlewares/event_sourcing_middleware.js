@@ -34,7 +34,7 @@ export default(localOnlyActions, needLocalProcessing, getActionPreProcessors, ge
    preProcessors: getActionPreProcessors(action),
    postProcessors: getActionPostProcessors(action),
    status: "draft",
-   info,
+   //info,
    createdAt: Date.now(),
    createdBy: (state.currentProfile._id || "anonymous")
   }

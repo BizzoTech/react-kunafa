@@ -9,9 +9,10 @@ import createStore from './createStore';
 
 class App extends Component {
  render() {
+  const Main = this.props.main;
   return (
    <Provider store={this.props.store}>
-    <MAIN/>
+    <Main/>
    </Provider>
   )
  }
@@ -25,5 +26,5 @@ export default(name, MAIN, appConfig) => {
  }, 500);
 
  render(
-  <App store={AppStore}/>, document.getElementById('root'));
+  <App store={AppStore} main={MAIN}/>, document.getElementById('root'));
 }

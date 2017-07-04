@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "bluebird": "^3.5.0",
     "moment": "^2.17.1",
     "platform": "^1.3.4",
     "pouchdb": "^6.2.0",
