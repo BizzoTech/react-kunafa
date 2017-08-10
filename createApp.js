@@ -22,9 +22,6 @@ export default(name, MAIN, appConfig) => {
 
   const config = {
     ...appConfig,
-    actionCreators: appConfig.appActionCreators,
-    reducers: appConfig.appReducers,
-    middlewares: appConfig.appMiddlewares,
     getLocalDbUrl: profileId => {
       return profileId || "anonymous";
     },
