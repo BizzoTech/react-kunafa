@@ -1,5 +1,7 @@
 import createApp from './createApp';
-import createStore from './createStore';
-import actions from './actions';
+import connect from 'kunafa-client/connect';
 
-export {createApp, createStore, actions};
+export {
+  createApp,
+  connect
+};
