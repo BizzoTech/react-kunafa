@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "kunafa-client": "git+https://github.com/BizzoTech/kunafa-client#cfb8ad78abebed2254414d514cb2d51c9f4ddec0",
+    "kunafa-client": "git+https://github.com/BizzoTech/kunafa-client#db373c302be43d4bc20657fbb054ba972faa8050",
     "platform": "^1.3.4",
     "store2": "^2.5.1",
     "react-redux": "^5.0.0"
