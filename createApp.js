@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 
-import createStore from 'kunafa-client/createStore';
+import {createStore} from 'kunafa-client';
 
 import deviceInfo from './deviceInfo';
 import cacheStore from './cacheStore';
