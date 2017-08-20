@@ -1234,9 +1234,9 @@ kind-of@^4.0.0:
   dependencies:
     is-buffer "^1.1.5"
 
-"kunafa-client@git+https://github.com/BizzoTech/kunafa-client#2293be4f6d0d59decdc7e88de441f8c3f32ccf9b":
+"kunafa-client@git+https://github.com/BizzoTech/kunafa-client#22b17f3915a3f12efd2026a5eb9cc238a0037fe8":
   version "0.0.1"
-  resolved "git+https://github.com/BizzoTech/kunafa-client#2293be4f6d0d59decdc7e88de441f8c3f32ccf9b"
+  resolved "git+https://github.com/BizzoTech/kunafa-client#22b17f3915a3f12efd2026a5eb9cc238a0037fe8"
   dependencies:
     moment "^2.17.1"
     pouchdb "^6.2.0"
@@ -1897,7 +1897,7 @@ rc@^1.0.3, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-redux@^5.0.0, react-redux@^5.0.5:
+react-redux@^5.0.5:
   version "5.0.6"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.6.tgz#23ed3a4f986359d68b5212eaaa681e60d6574946"
   dependencies:
