@@ -14,7 +14,7 @@
     "flow": "flow"
   },
   "dependencies": {
-    "kunafa-client": "git+https://github.com/BizzoTech/kunafa-client#f900b66ca2fa32a6ac25ba1f75f9641bfa0a2268",
+    "kunafa-client": "git+https://github.com/BizzoTech/kunafa-client#52ca601b80f80a0958cff5e2346c4217201a539d",
     "platform": "^1.3.4",
     "store2": "^2.5.1"
   },
