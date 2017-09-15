@@ -376,6 +376,10 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
+bluebird@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
+
 boom@2.x.x:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/boom/-/boom-2.10.1.tgz#39c8918ceff5799f83f9492a848f625add0c766f"
@@ -1234,10 +1238,11 @@ kind-of@^4.0.0:
   dependencies:
     is-buffer "^1.1.5"
 
-"kunafa-client@git+https://github.com/BizzoTech/kunafa-client#22b17f3915a3f12efd2026a5eb9cc238a0037fe8":
+"kunafa-client@git+https://github.com/BizzoTech/kunafa-client#f900b66ca2fa32a6ac25ba1f75f9641bfa0a2268":
   version "0.0.1"
-  resolved "git+https://github.com/BizzoTech/kunafa-client#22b17f3915a3f12efd2026a5eb9cc238a0037fe8"
+  resolved "git+https://github.com/BizzoTech/kunafa-client#f900b66ca2fa32a6ac25ba1f75f9641bfa0a2268"
   dependencies:
+    bluebird "^3.5.0"
     moment "^2.17.1"
     pouchdb "^6.2.0"
     pouchdb-find "^6.2.0"
