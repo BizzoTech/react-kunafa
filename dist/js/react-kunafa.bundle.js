@@ -2378,7 +2378,6 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_64__;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getProfileId = exports.logout = exports.login = undefined;
 
 var _cacheStore = __webpack_require__(66);
 
@@ -2386,7 +2385,7 @@ var _cacheStore2 = _interopRequireDefault(_cacheStore);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var login = exports.login = function login(username, password, profileId) {
+var login = function login(username, password, profileId) {
   return _cacheStore2.default.save("authCreds", {
     username: username,
     password: password,
@@ -2394,13 +2393,19 @@ var login = exports.login = function login(username, password, profileId) {
   });
 };
 
-var logout = exports.logout = function logout(username, password, profileId) {
+var logout = function logout(username, password, profileId) {
   return _cacheStore2.default.delete("authCreds");
 };
 
-var getProfileId = exports.getProfileId = function getProfileId() {
+var getProfileId = function getProfileId() {
   var authCreds = _cacheStore2.default.get("authCreds");
   return authCreds ? authCreds.profileId : undefined;
+};
+
+exports.default = {
+  login: login,
+  logout: logout,
+  getProfileId: getProfileId
 };
 
 /***/ }),
