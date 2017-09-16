@@ -28,7 +28,8 @@ module.exports = {
     react: "react",
     "react-dom": "react-dom",
     redux: "redux",
-    "react-redux": "react-redux"
+    "react-redux": "react-redux",
+    "kunafa-client": "kunafa-client"
   },
   plugins: [],
   module: {

@@ -3,6 +3,8 @@ import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 
 import {createStore} from 'kunafa-client';
+import RKunafa from './RKunafa';
+
 
 import deviceInfo from './deviceInfo';
 import cacheStore from './cacheStore';
@@ -21,7 +23,7 @@ class App extends Component {
 export default(name, MAIN, appConfig) => {
 
   const config = {
-    ...appConfig,
+    profileId: RKunafa.getProfileId(),
     getLocalDbUrl: profileId => {
       return profileId || "anonymous";
     },
@@ -29,7 +31,8 @@ export default(name, MAIN, appConfig) => {
     cacheStore,
     isConnected: async() => {
       return await navigator.onLine;
-    }
+    },
+    ...appConfig
   }
 
   const AppStore = createStore(config);
