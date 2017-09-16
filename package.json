@@ -15,7 +15,7 @@
     "flow": "flow"
   },
   "dependencies": {
-    "kunafa-client": "git+https://github.com/BizzoTech/kunafa-client#2d706d5ccdf093c5300c4aa02cec9a86a173cb7b",
+    "kunafa-client": "git+https://github.com/BizzoTech/kunafa-client#dcc0936953c7efffd4aeb472e5da2713fad3c51b",
     "platform": "^1.3.4",
     "store2": "^2.5.1"
   },
@@ -30,6 +30,10 @@
     "babel-preset-react": "^6.24.1",
     "flow-bin": "^0.53.1",
     "flow-copy-source": "^1.2.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.2",
     "webpack": "^3.6.0"
   }
 }

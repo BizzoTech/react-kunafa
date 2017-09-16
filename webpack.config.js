@@ -26,7 +26,9 @@ module.exports = {
   },
   externals: {
     react: "react",
-    "react-dom": "react-dom"
+    "react-dom": "react-dom",
+    redux: "redux",
+    "react-redux": "react-redux"
   },
   plugins: [],
   module: {
