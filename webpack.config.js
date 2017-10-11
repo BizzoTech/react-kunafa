@@ -29,7 +29,8 @@ module.exports = {
     "react-dom": "react-dom",
     redux: "redux",
     "react-redux": "react-redux",
-    "kunafa-client": "kunafa-client"
+    "kunafa-client": "kunafa-client",
+    'react-dom/server': 'react-dom/server'
   },
   plugins: [],
   module: {
