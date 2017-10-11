@@ -23,10 +23,14 @@ export default(name, MAIN, appConfig) => {
     getLocalDbUrl: profileId => {
       return profileId || "anonymous";
     },
+    ssr: true,
     ...appConfig
   }
 
   const AppStore = createStore(config);
 
-  return ReactDOMServer.renderToString(<App store={AppStore} main={MAIN}/>);
+  return {
+    html: ReactDOMServer.renderToString(<App store={AppStore} main={MAIN}/>),
+    store: AppStore
+  };
 }

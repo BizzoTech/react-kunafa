@@ -13961,12 +13961,16 @@ exports.default = function (name, MAIN, appConfig) {
   var config = Object.assign({
     getLocalDbUrl: function getLocalDbUrl(profileId) {
       return profileId || "anonymous";
-    }
+    },
+    ssr: true
   }, appConfig);
 
   var AppStore = (0, _kunafaClient.createStore)(config);
 
-  return _server2.default.renderToString(_react2.default.createElement(App, { store: AppStore, main: MAIN }));
+  return {
+    html: _server2.default.renderToString(_react2.default.createElement(App, { store: AppStore, main: MAIN })),
+    store: AppStore
+  };
 };
 
 /***/ }),
