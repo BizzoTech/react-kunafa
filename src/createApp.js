@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {render} from 'react-dom';
+import {render, hydrate} from 'react-dom';
 import {Provider} from 'react-redux';
 
 import {createStore} from 'kunafa-client';
@@ -35,8 +35,19 @@ export default(name, MAIN, appConfig) => {
     ...appConfig
   }
 
-  const AppStore = createStore(config);
+  if(window.__PRELOADED_STATE__){
+    const preloadedState = window.__PRELOADED_STATE__
 
-  render(
-    <App store={AppStore} main={MAIN}/>, document.getElementById('root'));
+    // Allow the passed state to be garbage-collected
+    delete window.__PRELOADED_STATE__
+    const AppStore = createStore(config, preloadedState);
+    hydrate(
+      <App store={AppStore} main={MAIN}/>, document.getElementById('root'));
+  }else{
+    const AppStore = createStore(config);
+    render(
+      <App store={AppStore} main={MAIN}/>, document.getElementById('root'));
+  }
+
+
 }

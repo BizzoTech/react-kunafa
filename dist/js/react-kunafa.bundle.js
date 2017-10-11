@@ -4675,9 +4675,17 @@ exports.default = function (name, MAIN, appConfig) {
     }()
   }, appConfig);
 
-  var AppStore = (0, _kunafaClient.createStore)(config);
+  if (window.__PRELOADED_STATE__) {
+    var preloadedState = window.__PRELOADED_STATE__;
 
-  (0, _reactDom.render)(_react2.default.createElement(App, { store: AppStore, main: MAIN }), document.getElementById('root'));
+    // Allow the passed state to be garbage-collected
+    delete window.__PRELOADED_STATE__;
+    var AppStore = (0, _kunafaClient.createStore)(config, preloadedState);
+    (0, _reactDom.hydrate)(_react2.default.createElement(App, { store: AppStore, main: MAIN }), document.getElementById('root'));
+  } else {
+    var _AppStore = (0, _kunafaClient.createStore)(config);
+    (0, _reactDom.render)(_react2.default.createElement(App, { store: _AppStore, main: MAIN }), document.getElementById('root'));
+  }
 };
 
 /***/ }),
@@ -13968,7 +13976,9 @@ exports.default = function (name, MAIN, appConfig) {
   var AppStore = (0, _kunafaClient.createStore)(config);
 
   return {
-    html: _server2.default.renderToString(_react2.default.createElement(App, { store: AppStore, main: MAIN })),
+    getHtml: function getHtml() {
+      return _server2.default.renderToString(_react2.default.createElement(App, { store: AppStore, main: MAIN }));
+    },
     store: AppStore
   };
 };

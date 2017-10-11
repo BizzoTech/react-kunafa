@@ -30,7 +30,7 @@ export default(name, MAIN, appConfig) => {
   const AppStore = createStore(config);
 
   return {
-    html: ReactDOMServer.renderToString(<App store={AppStore} main={MAIN}/>),
+    getHtml: () => ReactDOMServer.renderToString(<App store={AppStore} main={MAIN}/>),
     store: AppStore
   };
 }
