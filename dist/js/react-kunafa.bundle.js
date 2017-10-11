@@ -4642,8 +4642,10 @@ var App = function (_Component) {
 
 exports.default = function (name, MAIN, appConfig) {
 
+  var profileId = _RKunafa2.default.getProfileId();
+
   var config = Object.assign({
-    profileId: _RKunafa2.default.getProfileId(),
+    profileId: profileId,
     getLocalDbUrl: function getLocalDbUrl(profileId) {
       return profileId || "anonymous";
     },
@@ -4680,7 +4682,9 @@ exports.default = function (name, MAIN, appConfig) {
 
     // Allow the passed state to be garbage-collected
     delete window.__PRELOADED_STATE__;
-    var AppStore = (0, _kunafaClient.createStore)(config, preloadedState);
+    var AppStore = (0, _kunafaClient.createStore)(config, Object.assign({}, preloadedState, { currentProfile: {
+        _id: profileId
+      } }));
     (0, _reactDom.hydrate)(_react2.default.createElement(App, { store: AppStore, main: MAIN }), document.getElementById('root'));
   } else {
     var _AppStore = (0, _kunafaClient.createStore)(config);
