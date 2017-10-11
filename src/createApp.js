@@ -47,6 +47,9 @@ export default(name, MAIN, appConfig) => {
     hydrate(
       <App store={AppStore} main={MAIN}/>, document.getElementById('root'));
     if(profileId){
+      AppStore.dispatch(AppStore.actions.fetchDoc({
+          _id: profileId
+        }));
       AppStore.dispatch({
           type: 'LOGIN',
           profileId: profileId

@@ -4686,6 +4686,9 @@ exports.default = function (name, MAIN, appConfig) {
 
     (0, _reactDom.hydrate)(_react2.default.createElement(App, { store: AppStore, main: MAIN }), document.getElementById('root'));
     if (profileId) {
+      AppStore.dispatch(AppStore.actions.fetchDoc({
+        _id: profileId
+      }));
       AppStore.dispatch({
         type: 'LOGIN',
         profileId: profileId
