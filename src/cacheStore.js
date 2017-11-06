@@ -1,5 +1,4 @@
 import Storage from 'store2';
-import R from 'ramda';
 
 export default {
   keys: Storage.keys.bind(Storage),
@@ -8,6 +7,6 @@ export default {
   delete: Storage.remove.bind(Storage),
   getAll: async() => {
     const items = Storage.getAll();
-    return R.values(items);
+    return Object.values(items);
   }
 }
