@@ -4572,9 +4572,9 @@ var connect = function connect(mapStateToProps, mapDispatchToProps) {
       }, mapDispatchToProps)(component);
     } else {
       return (0, _kunafaClient.connect)(function (state, ownProps) {
-        return Object.assign({}, mapStateToProps(state, ownProps), {
+        return {
           translations: ownProps.selectors.translationsSelector(state)
-        });
+        };
       }, mapDispatchToProps)(component);
     }
   };
