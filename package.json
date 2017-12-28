@@ -15,7 +15,6 @@
     "flow": "flow"
   },
   "dependencies": {
-    "i18n-js": "^3.0.1",
     "platform": "^1.3.4",
     "store2": "^2.5.1"
   },
@@ -30,6 +29,7 @@
     "babel-preset-react": "^6.24.1",
     "flow-bin": "^0.53.1",
     "flow-copy-source": "^1.2.0",
+    "i18n-js": "^3.0.1",
     "kunafa-client": "git+https://github.com/BizzoTech/kunafa-client#dcc0936953c7efffd4aeb472e5da2713fad3c51b",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

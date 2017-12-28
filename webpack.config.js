@@ -25,6 +25,7 @@ module.exports = {
       : 'js/react-kunafa.bundle.min.js'
   },
   externals: {
+    "i18n-js": "i18n-js",
     react: "react",
     "react-dom": "react-dom",
     redux: "redux",
