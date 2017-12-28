@@ -9,6 +9,8 @@ import RKunafa from './RKunafa';
 import deviceInfo from './deviceInfo';
 import cacheStore from './cacheStore';
 
+import * as selectors from './selectors';
+
 class App extends Component {
   render() {
     const Main = this.props.main;
@@ -34,7 +36,11 @@ export default(name, MAIN, appConfig) => {
     isConnected: async() => {
       return await navigator.onLine;
     },
-    ...appConfig
+    ...appConfig,
+    selectors: {
+      ...appConfig.selectors,
+      ...selectors
+    }
   }
 
   if(window.__PRELOADED_STATE__){
