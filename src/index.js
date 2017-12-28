@@ -15,7 +15,6 @@ const connect = (mapStateToProps, mapDispatchToProps) => component => {
   } else {
     return kunafaConnect((state, ownProps) => {
       return {
-        ...mapStateToProps(state, ownProps),
         translations: ownProps.selectors.translationsSelector(state)
       }
     }, mapDispatchToProps)(component);
