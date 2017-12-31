@@ -12,6 +12,7 @@ import deviceInfo from './deviceInfo';
 import cacheStore from './cacheStore';
 
 import * as selectors from './selectors';
+import middlewares from './middlewares';
 
 class App extends Component {
   render() {
@@ -44,7 +45,11 @@ export default (name, MAIN, appConfig) => {
     selectors: {
       ...appConfig.selectors,
       ...selectors
-    }
+    },
+    middlewares: [
+      ...appConfig.middlewares,
+      ...middlewares
+    ]
   }
 
   if (window.__PRELOADED_STATE__) {
