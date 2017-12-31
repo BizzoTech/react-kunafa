@@ -13,6 +13,8 @@ import cacheStore from './cacheStore';
 
 import * as selectors from './selectors';
 import middlewares from './middlewares';
+import actionCreators from './actionCreators';
+
 
 class App extends Component {
   render() {
@@ -42,6 +44,10 @@ export default (name, MAIN, appConfig) => {
       return await navigator.onLine;
     },
     ...appConfig,
+    actionCreators: {
+      ...appConfig.actionCreators,
+      ...actionCreators
+    },
     selectors: {
       ...appConfig.selectors,
       ...selectors
