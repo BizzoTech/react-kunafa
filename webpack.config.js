@@ -31,7 +31,8 @@ module.exports = {
     redux: "redux",
     "react-redux": "react-redux",
     "kunafa-client": "kunafa-client",
-    'react-dom/server': 'react-dom/server'
+    'react-dom/server': 'react-dom/server',
+    'pouchdb': 'pouchdb'
   },
   plugins: [],
   module: {

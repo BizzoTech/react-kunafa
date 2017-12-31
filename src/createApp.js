@@ -1,9 +1,11 @@
-import React, {Component} from 'react';
-import {render, hydrate} from 'react-dom';
-import {Provider} from 'react-redux';
+import React, { Component } from 'react';
+import { render, hydrate } from 'react-dom';
+import { Provider } from 'react-redux';
 
-import {createStore} from 'kunafa-client';
+import { createStore } from 'kunafa-client';
 import RKunafa from './RKunafa';
+
+import startDbSync from './startDbSync';
 
 
 import deviceInfo from './deviceInfo';
@@ -16,13 +18,15 @@ class App extends Component {
     const Main = this.props.main;
     return (
       <Provider store={this.props.store}>
-        <Main/>
+        <Main />
       </Provider>
     )
   }
 }
 
-export default(name, MAIN, appConfig) => {
+export default (name, MAIN, appConfig) => {
+
+  startDbSync(appConfig.HOST, appConfig.SSL);
 
   const profileId = RKunafa.getProfileId();
 
@@ -33,7 +37,7 @@ export default(name, MAIN, appConfig) => {
     },
     deviceInfo,
     cacheStore,
-    isConnected: async() => {
+    isConnected: async () => {
       return await navigator.onLine;
     },
     ...appConfig,
@@ -43,7 +47,7 @@ export default(name, MAIN, appConfig) => {
     }
   }
 
-  if(window.__PRELOADED_STATE__){
+  if (window.__PRELOADED_STATE__) {
     const preloadedState = window.__PRELOADED_STATE__
 
     // Allow the passed state to be garbage-collected
@@ -51,21 +55,21 @@ export default(name, MAIN, appConfig) => {
     const AppStore = createStore(config, preloadedState);
 
     hydrate(
-      <App store={AppStore} main={MAIN}/>, document.getElementById('root'));
-    if(profileId){
+      <App store={AppStore} main={MAIN} />, document.getElementById('root'));
+    if (profileId) {
       AppStore.dispatch(AppStore.actions.fetchDoc({
-          _id: profileId
-        }));
+        _id: profileId
+      }));
       AppStore.dispatch({
-          type: 'LOGIN',
-          profileId: profileId
-        });
+        type: 'LOGIN',
+        profileId: profileId
+      });
     }
 
-  }else{
+  } else {
     const AppStore = createStore(config);
     render(
-      <App store={AppStore} main={MAIN}/>, document.getElementById('root'));
+      <App store={AppStore} main={MAIN} />, document.getElementById('root'));
   }
 
 
