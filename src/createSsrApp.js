@@ -4,7 +4,9 @@ import {Provider} from 'react-redux';
 
 import {createStore} from 'kunafa-client';
 
-
+import * as selectors from './selectors';
+import middlewares from './middlewares';
+import actionCreators from './actionCreators';
 
 class App extends Component {
   render() {
@@ -24,7 +26,19 @@ export default(name, MAIN, appConfig) => {
       return profileId || "anonymous";
     },
     ssr: true,
-    ...appConfig
+    ...appConfig,
+    actionCreators: {
+      ...appConfig.actionCreators,
+      ...actionCreators
+    },
+    selectors: {
+      ...appConfig.selectors,
+      ...selectors
+    },
+    middlewares: [
+      ...appConfig.middlewares,
+      ...middlewares
+    ]
   }
 
   const AppStore = createStore(config);
