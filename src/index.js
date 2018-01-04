@@ -1,24 +1,25 @@
 // @flow
 import createApp from './createApp';
 import createSsrApp from './createSsrApp';
-import {connect as kunafaConnect} from 'kunafa-client';
+import { connect as kunafaConnect } from 'kunafa-client';
 import RKunafa from './RKunafa';
+import I18n from 'i18n-js';
+
 
 const connect = (mapStateToProps, mapDispatchToProps) => component => {
-  if(mapStateToProps){
-    return kunafaConnect((state, ownProps) => {
+  return kunafaConnect((state, ownProps) => {
+    const translations = ownProps.selectors.translationsSelector ? ownProps.selectors.translationsSelector(state) : I18n.translations;
+    if (mapStateToProps) {
       return {
         ...mapStateToProps(state, ownProps),
-        translations: ownProps.selectors.translationsSelector(state)
+        translations
       }
-    }, mapDispatchToProps)(component);
-  } else {
-    return kunafaConnect((state, ownProps) => {
+    } else {
       return {
-        translations: ownProps.selectors.translationsSelector(state)
+        translations
       }
-    }, mapDispatchToProps)(component);
-  }
+    }
+  }, mapDispatchToProps)(component);
 }
 
 export default RKunafa;
