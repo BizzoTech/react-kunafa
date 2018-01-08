@@ -27,7 +27,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "kunafa-client": "git+https://github.com/BizzoTech/kunafa-client#c5d7f4fe99945909fe079c64ba9c9300d95583a8",
+    "kunafa-client": "git+https://github.com/BizzoTech/kunafa-client#ab2e3197a19857d552fb0f685e662fe267a36169",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "webpack": "^3.10.0"
