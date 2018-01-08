@@ -1,4 +1,3 @@
-// @flow
 import createApp from './createApp';
 import createSsrApp from './createSsrApp';
 import { connect as kunafaConnect } from 'kunafa-client';

@@ -7,7 +7,7 @@
 		exports["reactKunafa"] = factory(require("kunafa-client"), require("react"), require("react-redux"), require("store2"), require("i18n-js"), require("react-dom"), require("pouchdb"), require("platform"), require("reselect"), require("ramda"), require("react-dom/server"));
 	else
 		root["reactKunafa"] = factory(root["kunafa-client"], root["react"], root["react-redux"], root["store2"], root["i18n-js"], root["react-dom"], root["pouchdb"], root["platform"], root["reselect"], root["ramda"], root["react-dom/server"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_12__, __WEBPACK_EXTERNAL_MODULE_14__, __WEBPACK_EXTERNAL_MODULE_16__, __WEBPACK_EXTERNAL_MODULE_17__, __WEBPACK_EXTERNAL_MODULE_18__, __WEBPACK_EXTERNAL_MODULE_22__) {
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_12__, __WEBPACK_EXTERNAL_MODULE_14__, __WEBPACK_EXTERNAL_MODULE_16__, __WEBPACK_EXTERNAL_MODULE_17__, __WEBPACK_EXTERNAL_MODULE_18__, __WEBPACK_EXTERNAL_MODULE_22__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -316,6 +316,7 @@ var connect = function connect(mapStateToProps, mapDispatchToProps) {
     }, mapDispatchToProps)(component);
   };
 };
+
 exports.default = _RKunafa2.default;
 exports.createApp = _createApp2.default;
 exports.createSsrApp = _createSsrApp2.default;
