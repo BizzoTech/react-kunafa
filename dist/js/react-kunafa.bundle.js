@@ -163,10 +163,10 @@ exports.default = {
           switch (_context.prev = _context.next) {
             case 0:
               items = _store2.default.getAll();
-              return _context.abrupt('return', Object.values(items));
+              return _context.abrupt("return", Object.values(items));
 
             case 2:
-            case 'end':
+            case "end":
               return _context.stop();
           }
         }
@@ -214,7 +214,7 @@ var sharedDocsSelector = exports.sharedDocsSelector = function sharedDocsSelecto
 
 var translationsSelector = exports.translationsSelector = (0, _reselect.createSelector)(sharedDocsSelector, function (sharedDocs) {
   var newTranslations = R.filter(function (d) {
-    return d.type === 'translation';
+    return d.type === "translation";
   }, sharedDocs);
   var newTranslationsObj = Object.values(newTranslations).reduce(function (obj, o) {
     return Object.assign({}, obj, _defineProperty({}, o.lang, o.doc));
@@ -397,7 +397,7 @@ var App = function (_Component) {
   }
 
   _createClass(App, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       var Main = this.props.main;
       return _react2.default.createElement(
@@ -412,7 +412,6 @@ var App = function (_Component) {
 }(_react.Component);
 
 exports.default = function (name, MAIN, appConfig) {
-
   (0, _startDbSync2.default)(appConfig.HOST, appConfig.SSL);
 
   var profileId = _RKunafa2.default.getProfileId();
@@ -434,10 +433,10 @@ exports.default = function (name, MAIN, appConfig) {
                 return navigator.onLine;
 
               case 2:
-                return _context.abrupt('return', _context.sent);
+                return _context.abrupt("return", _context.sent);
 
               case 3:
-              case 'end':
+              case "end":
                 return _context.stop();
             }
           }
@@ -451,7 +450,7 @@ exports.default = function (name, MAIN, appConfig) {
   }, appConfig, {
     actionCreators: Object.assign({}, appConfig.actionCreators, _actionCreators2.default),
     selectors: Object.assign({}, appConfig.selectors, selectors),
-    middlewares: [].concat(_toConsumableArray(appConfig.middlewares), _toConsumableArray(_middlewares2.default))
+    middlewares: appConfig.middlewares ? [].concat(_toConsumableArray(appConfig.middlewares), _toConsumableArray(_middlewares2.default)) : _middlewares2.default
   });
 
   if (window.__PRELOADED_STATE__) {
@@ -461,19 +460,19 @@ exports.default = function (name, MAIN, appConfig) {
     delete window.__PRELOADED_STATE__;
     var AppStore = (0, _kunafaClient.createStore)(config, preloadedState);
 
-    (0, _reactDom.hydrate)(_react2.default.createElement(App, { store: AppStore, main: MAIN }), document.getElementById('root'));
+    (0, _reactDom.hydrate)(_react2.default.createElement(App, { store: AppStore, main: MAIN }), document.getElementById("root"));
     if (profileId) {
       AppStore.dispatch(AppStore.actions.fetchDoc({
         _id: profileId
       }));
       AppStore.dispatch({
-        type: 'LOGIN',
+        type: "LOGIN",
         profileId: profileId
       });
     }
   } else {
     var _AppStore = (0, _kunafaClient.createStore)(config);
-    (0, _reactDom.render)(_react2.default.createElement(App, { store: _AppStore, main: MAIN }), document.getElementById('root'));
+    (0, _reactDom.render)(_react2.default.createElement(App, { store: _AppStore, main: MAIN }), document.getElementById("root"));
   }
 };
 
@@ -509,22 +508,22 @@ var _store2 = _interopRequireDefault(_store);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (HOST, SSL) {
-  var PROTCOL = SSL === "on" ? 'https' : 'http';
+  var PROTCOL = SSL === "on" ? "https" : "http";
 
   var cachedDBName = undefined;
   var outSyncHandler = undefined;
   var inSyncInterval = undefined;
 
   var createSyncHandler = function createSyncHandler() {
-    var authCreds = _store2.default.get('authCreds');
-    var dbName = authCreds ? authCreds.profileId : 'anonymous';
+    var authCreds = _store2.default.get("authCreds");
+    var dbName = authCreds ? authCreds.profileId : "anonymous";
     if (dbName === cachedDBName) {
       return;
     }
 
     var localDB = new _pouchdb2.default(dbName, { auto_compaction: true });
 
-    var dbUrl = authCreds ? PROTCOL + '://' + authCreds.username + ':' + authCreds.password + '@' + HOST + '/db' : PROTCOL + '://' + HOST + '/anonymous';
+    var dbUrl = authCreds ? PROTCOL + "://" + authCreds.username + ":" + authCreds.password + "@" + HOST + "/db" : PROTCOL + "://" + HOST + "/anonymous";
 
     var remoteDB = new _pouchdb2.default(dbUrl);
 
@@ -541,7 +540,6 @@ exports.default = function (HOST, SSL) {
         retry: true
       });
     } else {
-
       var onSyncError = function onSyncError(err) {
         if (err && err.status === 401) {
           //Unauthorized user
@@ -556,7 +554,7 @@ exports.default = function (HOST, SSL) {
         localDB.replicate.from(remoteDB, {
           selector: authCreds ? {
             _id: {
-              $regex: '^' + authCreds.profileId
+              $regex: "^" + authCreds.profileId
             }
           } : undefined
         }).on("error", onSyncError);
@@ -567,7 +565,7 @@ exports.default = function (HOST, SSL) {
         retry: false,
         selector: authCreds ? {
           _id: {
-            $regex: '^' + authCreds.profileId
+            $regex: "^" + authCreds.profileId
           }
         } : undefined
       }).on("error", onSyncError);
@@ -579,7 +577,7 @@ exports.default = function (HOST, SSL) {
   setInterval(createSyncHandler, 1000);
 
   var localSharedDB = new _pouchdb2.default("shared", { auto_compaction: true });
-  var sharedDbUrl = PROTCOL + '://' + HOST + '/shared';
+  var sharedDbUrl = PROTCOL + "://" + HOST + "/shared";
   var remoteSharedDB = new _pouchdb2.default(sharedDbUrl);
 
   var syncShared = function syncShared() {
@@ -655,12 +653,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var routeToPath = function routeToPath(route) {
-  return "/" + route.path.join('/');
+  return "/" + route.path.join("/");
 };
 
 var pathToRoute = function pathToRoute(path) {
   return {
-    path: path.substr(1).split('/')
+    path: path.substr(1).split("/")
   };
 };
 
@@ -669,21 +667,20 @@ exports.default = function (store, config) {
     var path = document.location.pathname;
     var route = pathToRoute(path);
     next(config.actionCreators.goTo(route.path, route.params));
-    window.addEventListener('popstate', function (event) {
+    window.addEventListener("popstate", function (event) {
       var path = document.location.pathname;
       var route = pathToRoute(path);
       next(config.actionCreators.goTo(route.path, route.params));
     });
     return function (action) {
-
-      if (action.type === 'NAVIGATE_TO') {
-        history.pushState(action.route, '', routeToPath(action.route));
+      if (action.type === "NAVIGATE_TO") {
+        history.pushState(action.route, "", routeToPath(action.route));
       }
-      if (action.type === 'GO_TO' || action.type === 'TRANSITE_TO') {
-        history.replaceState(action.route, '', routeToPath(action.route));
+      if (action.type === "GO_TO" || action.type === "TRANSITE_TO") {
+        history.replaceState(action.route, "", routeToPath(action.route));
       }
-      if (action.type === 'RESET_HISTORY') {
-        history.replaceState({}, '', '/');
+      if (action.type === "RESET_HISTORY") {
+        history.replaceState({}, "", "/");
       }
       return next(action);
     };
@@ -712,7 +709,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 var skipLogin = exports.skipLogin = function skipLogin() {
   return {
-    type: 'SKIP_LOGIN'
+    type: "SKIP_LOGIN"
   };
 };
 
@@ -725,12 +722,12 @@ var login = function () {
           case 0:
             _context.next = 2;
             return fetch(hostUrl + "/_session", {
-              method: 'POST',
-              credentials: 'include',
+              method: "POST",
+              credentials: "include",
               body: JSON.stringify(user),
               headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                Accept: "application/json",
+                "Content-Type": "application/json"
               }
             });
 
@@ -742,14 +739,14 @@ var login = function () {
               break;
             }
 
-            return _context.abrupt('return', response.json());
+            return _context.abrupt("return", response.json());
 
           case 7:
             console.log(response);
             throw new Error("Login Error");
 
           case 9:
-          case 'end':
+          case "end":
             return _context.stop();
         }
       }
@@ -771,10 +768,10 @@ var fetchUser = function () {
             url = hostUrl + "/_users/" + user_id;
             _context2.next = 3;
             return fetch(url, {
-              method: 'GET',
-              credentials: 'include',
+              method: "GET",
+              credentials: "include",
               headers: {
-                'Accept': 'application/json'
+                Accept: "application/json"
               }
             });
 
@@ -786,13 +783,13 @@ var fetchUser = function () {
               break;
             }
 
-            return _context2.abrupt('return', response.json());
+            return _context2.abrupt("return", response.json());
 
           case 8:
             throw new Error("Request Error");
 
           case 9:
-          case 'end':
+          case "end":
             return _context2.stop();
         }
       }
@@ -819,15 +816,15 @@ var auth = function () {
 
           case 2:
             session = _context3.sent;
-            userId = 'org.couchdb.user:' + session.name;
+            userId = "org.couchdb.user:" + session.name;
             _context3.next = 6;
             return fetchUser(hostUrl, userId);
 
           case 6:
-            return _context3.abrupt('return', _context3.sent);
+            return _context3.abrupt("return", _context3.sent);
 
           case 7:
-          case 'end':
+          case "end":
             return _context3.stop();
         }
       }
@@ -841,7 +838,7 @@ var auth = function () {
 
 var startLoading = exports.startLoading = function startLoading() {
   return {
-    type: 'START_LOADING'
+    type: "START_LOADING"
   };
 };
 
@@ -850,7 +847,7 @@ var userLogin = exports.userLogin = function userLogin(name, password, event, _r
       HOST = _ref4.HOST,
       SSL = _ref4.SSL;
 
-  var PROTCOL = SSL === "on" ? 'https' : 'http';
+  var PROTCOL = SSL === "on" ? "https" : "http";
   return function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch) {
       var user;
@@ -858,13 +855,12 @@ var userLogin = exports.userLogin = function userLogin(name, password, event, _r
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-
               dispatch({
-                type: 'START_LOADING'
+                type: "START_LOADING"
               });
               _context4.prev = 1;
               _context4.next = 4;
-              return auth(name, password, PROTCOL + '://' + HOST);
+              return auth(name, password, PROTCOL + "://" + HOST);
 
             case 4:
               user = _context4.sent;
@@ -878,7 +874,7 @@ var userLogin = exports.userLogin = function userLogin(name, password, event, _r
                 }));
               }
               dispatch({
-                type: 'LOGIN',
+                type: "LOGIN",
                 profileId: user.profileId
               });
               _context4.next = 13;
@@ -886,12 +882,12 @@ var userLogin = exports.userLogin = function userLogin(name, password, event, _r
 
             case 10:
               _context4.prev = 10;
-              _context4.t0 = _context4['catch'](1);
+              _context4.t0 = _context4["catch"](1);
 
               console.log(_context4.t0);
 
             case 13:
-            case 'end':
+            case "end":
               return _context4.stop();
           }
         }
@@ -907,11 +903,11 @@ var userLogin = exports.userLogin = function userLogin(name, password, event, _r
 var userLogout = exports.userLogout = function userLogout() {
   return function (dispatch) {
     dispatch({
-      type: 'START_LOADING'
+      type: "START_LOADING"
     });
     _RKunafa2.default.logout();
     dispatch({
-      type: 'LOGOUT'
+      type: "LOGOUT"
     });
   };
 };
@@ -975,7 +971,7 @@ var App = function (_Component) {
   }
 
   _createClass(App, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       var Main = this.props.main;
       return _react2.default.createElement(
@@ -990,7 +986,6 @@ var App = function (_Component) {
 }(_react.Component);
 
 exports.default = function (name, MAIN, appConfig) {
-
   var config = Object.assign({
     getLocalDbUrl: function getLocalDbUrl(profileId) {
       return profileId || "anonymous";

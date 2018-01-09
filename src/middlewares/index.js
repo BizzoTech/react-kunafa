@@ -1,5 +1,3 @@
-import navigationMiddleware from './navigationMiddleware';
+import navigationMiddleware from "./navigationMiddleware";
 
-export default [
-  navigationMiddleware
-]
+export default [navigationMiddleware];
