@@ -6,4 +6,4 @@ import Authorize from "./Authorize";
 import RKunafa from "./RKunafa";
 
 export default RKunafa;
-export { createApp, createSsrApp, connect };
+export { createApp, createSsrApp, connect, Authorize };

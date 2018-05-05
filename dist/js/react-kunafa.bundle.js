@@ -322,7 +322,7 @@ exports.default = connect;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.connect = exports.createSsrApp = exports.createApp = undefined;
+exports.Authorize = exports.connect = exports.createSsrApp = exports.createApp = undefined;
 
 var _createApp = __webpack_require__(13);
 
@@ -350,6 +350,7 @@ exports.default = _RKunafa2.default;
 exports.createApp = _createApp2.default;
 exports.createSsrApp = _createSsrApp2.default;
 exports.connect = _connect2.default;
+exports.Authorize = _Authorize2.default;
 
 /***/ }),
 /* 13 */
@@ -1068,7 +1069,7 @@ var Authorize = function Authorize(_ref) {
   if (!loggedIn || !allow) {
     return null;
   }
-  var roles = currentProfile.roles || ['user'];
+  var roles = currentProfile.roles || ["user"];
   if (R.intersection(allow, roles).length > 0) {
     return children;
   }
