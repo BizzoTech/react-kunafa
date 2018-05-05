@@ -7,7 +7,9 @@ const Authorize = ({ children, allow, loggedIn, currentProfile }) => {
     return null;
   }
   const allowedRoles = allow || ["user"];
-  const roles = currentProfile.roles ? ["user", ... currentProfile.roles] : ["user"];
+  const roles = currentProfile.roles
+    ? ["user", ...currentProfile.roles]
+    : ["user"];
   if (
     roles.includes("admin") ||
     R.intersection(allowedRoles, roles).length > 0
