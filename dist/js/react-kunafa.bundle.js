@@ -1072,7 +1072,7 @@ var Authorize = function Authorize(_ref) {
     return null;
   }
   var allowedRoles = allow || ["user"];
-  var roles = ["user"].concat(_toConsumableArray(currentProfile.roles)) || ["user"];
+  var roles = ["user"].concat(_toConsumableArray(currentProfile.roles || [])) || ["user"];
   if (roles.includes("admin") || R.intersection(allowedRoles, roles).length > 0) {
     return children;
   }
