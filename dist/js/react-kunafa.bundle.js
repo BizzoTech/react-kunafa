@@ -1058,6 +1058,8 @@ var _connect2 = _interopRequireDefault(_connect);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 var R = __webpack_require__(8);
 
 var Authorize = function Authorize(_ref) {
@@ -1066,11 +1068,12 @@ var Authorize = function Authorize(_ref) {
       loggedIn = _ref.loggedIn,
       currentProfile = _ref.currentProfile;
 
-  if (!loggedIn || !allow) {
+  if (!loggedIn) {
     return null;
   }
-  var roles = currentProfile.roles || ["user"];
-  if (R.intersection(allow, roles).length > 0) {
+  var allowedRoles = allow || ["user"];
+  var roles = ["user"].concat(_toConsumableArray(currentProfile.roles)) || ["user"];
+  if (roles.includes("admin") || R.intersection(allowedRoles, roles).length > 0) {
     return children;
   }
   return null;

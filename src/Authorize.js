@@ -3,11 +3,15 @@ import connect from "./connect";
 const R = require("ramda");
 
 const Authorize = ({ children, allow, loggedIn, currentProfile }) => {
-  if (!loggedIn || !allow) {
+  if (!loggedIn) {
     return null;
   }
-  const roles = currentProfile.roles || ["user"];
-  if (R.intersection(allow, roles).length > 0) {
+  const allowedRoles = allow || ["user"];
+  const roles = ["user", ...currentProfile.roles] || ["user"];
+  if (
+    roles.includes("admin") ||
+    R.intersection(allowedRoles, roles).length > 0
+  ) {
     return children;
   }
   return null;
