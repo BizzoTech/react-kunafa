@@ -7,7 +7,7 @@
 		exports["reactKunafa"] = factory(require("react"), require("kunafa-client"), require("react-redux"), require("store2"), require("i18n-js"), require("ramda"), require("react-dom"), require("pouchdb"), require("platform"), require("reselect"), require("react-dom/server"));
 	else
 		root["reactKunafa"] = factory(root["react"], root["kunafa-client"], root["react-redux"], root["store2"], root["i18n-js"], root["ramda"], root["react-dom"], root["pouchdb"], root["platform"], root["reselect"], root["react-dom/server"]);
-})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_14__, __WEBPACK_EXTERNAL_MODULE_16__, __WEBPACK_EXTERNAL_MODULE_18__, __WEBPACK_EXTERNAL_MODULE_19__, __WEBPACK_EXTERNAL_MODULE_23__) {
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__, __WEBPACK_EXTERNAL_MODULE_14__, __WEBPACK_EXTERNAL_MODULE_16__, __WEBPACK_EXTERNAL_MODULE_18__, __WEBPACK_EXTERNAL_MODULE_19__, __WEBPACK_EXTERNAL_MODULE_23__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -75,6 +75,12 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_0__;
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +90,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _cacheStore = __webpack_require__(4);
+var _cacheStore = __webpack_require__(5);
 
 var _cacheStore2 = _interopRequireDefault(_cacheStore);
 
@@ -114,12 +120,6 @@ exports.default = {
 };
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
-
-/***/ }),
 /* 2 */
 /***/ (function(module, exports) {
 
@@ -127,12 +127,6 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
-
-/***/ }),
-/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -142,7 +136,51 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _store = __webpack_require__(5);
+var _kunafaClient = __webpack_require__(2);
+
+var _i18nJs = __webpack_require__(8);
+
+var _i18nJs2 = _interopRequireDefault(_i18nJs);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var connect = function connect(mapStateToProps, mapDispatchToProps) {
+  return function (component) {
+    return (0, _kunafaClient.connect)(function (state, ownProps) {
+      var translations = ownProps.selectors.translationsSelector ? ownProps.selectors.translationsSelector(state) : _i18nJs2.default.translations;
+      if (mapStateToProps) {
+        return Object.assign({}, mapStateToProps(state, ownProps), {
+          translations: translations
+        });
+      } else {
+        return {
+          translations: translations
+        };
+      }
+    }, mapDispatchToProps)(component);
+  };
+};
+
+exports.default = connect;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _store = __webpack_require__(6);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -180,13 +218,13 @@ exports.default = {
 };
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
+module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -199,7 +237,7 @@ exports.translationsSelector = exports.sharedDocsSelector = undefined;
 
 var _reselect = __webpack_require__(19);
 
-var _i18nJs = __webpack_require__(7);
+var _i18nJs = __webpack_require__(8);
 
 var _i18nJs2 = _interopRequireDefault(_i18nJs);
 
@@ -207,7 +245,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var R = __webpack_require__(8);
+var R = __webpack_require__(9);
 var sharedDocsSelector = exports.sharedDocsSelector = function sharedDocsSelector(state) {
   return state.sharedDocs;
 };
@@ -225,12 +263,6 @@ var translationsSelector = exports.translationsSelector = (0, _reselect.createSe
 });
 
 /***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
-
-/***/ }),
 /* 8 */
 /***/ (function(module, exports) {
 
@@ -238,6 +270,12 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_8__;
 
 /***/ }),
 /* 9 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_9__;
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -256,7 +294,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = [_navigationMiddleware2.default];
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -275,44 +313,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 exports.default = Object.assign({}, authActions);
 
 /***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _kunafaClient = __webpack_require__(2);
-
-var _i18nJs = __webpack_require__(7);
-
-var _i18nJs2 = _interopRequireDefault(_i18nJs);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var connect = function connect(mapStateToProps, mapDispatchToProps) {
-  return function (component) {
-    return (0, _kunafaClient.connect)(function (state, ownProps) {
-      var translations = ownProps.selectors.translationsSelector ? ownProps.selectors.translationsSelector(state) : _i18nJs2.default.translations;
-      if (mapStateToProps) {
-        return Object.assign({}, mapStateToProps(state, ownProps), {
-          translations: translations
-        });
-      } else {
-        return {
-          translations: translations
-        };
-      }
-    }, mapDispatchToProps)(component);
-  };
-};
-
-exports.default = connect;
-
-/***/ }),
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -322,7 +322,7 @@ exports.default = connect;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Authorize = exports.connect = exports.createSsrApp = exports.createApp = undefined;
+exports.StaticContent = exports.Authorize = exports.connect = exports.createSsrApp = exports.createApp = undefined;
 
 var _createApp = __webpack_require__(13);
 
@@ -332,7 +332,7 @@ var _createSsrApp = __webpack_require__(22);
 
 var _createSsrApp2 = _interopRequireDefault(_createSsrApp);
 
-var _connect = __webpack_require__(11);
+var _connect = __webpack_require__(3);
 
 var _connect2 = _interopRequireDefault(_connect);
 
@@ -340,7 +340,11 @@ var _Authorize = __webpack_require__(24);
 
 var _Authorize2 = _interopRequireDefault(_Authorize);
 
-var _RKunafa = __webpack_require__(0);
+var _StaticContent = __webpack_require__(25);
+
+var _StaticContent2 = _interopRequireDefault(_StaticContent);
+
+var _RKunafa = __webpack_require__(1);
 
 var _RKunafa2 = _interopRequireDefault(_RKunafa);
 
@@ -351,6 +355,7 @@ exports.createApp = _createApp2.default;
 exports.createSsrApp = _createSsrApp2.default;
 exports.connect = _connect2.default;
 exports.Authorize = _Authorize2.default;
+exports.StaticContent = _StaticContent2.default;
 
 /***/ }),
 /* 13 */
@@ -365,17 +370,17 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = __webpack_require__(14);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(4);
 
 var _kunafaClient = __webpack_require__(2);
 
-var _RKunafa = __webpack_require__(0);
+var _RKunafa = __webpack_require__(1);
 
 var _RKunafa2 = _interopRequireDefault(_RKunafa);
 
@@ -387,19 +392,19 @@ var _deviceInfo = __webpack_require__(17);
 
 var _deviceInfo2 = _interopRequireDefault(_deviceInfo);
 
-var _cacheStore = __webpack_require__(4);
+var _cacheStore = __webpack_require__(5);
 
 var _cacheStore2 = _interopRequireDefault(_cacheStore);
 
-var _selectors = __webpack_require__(6);
+var _selectors = __webpack_require__(7);
 
 var selectors = _interopRequireWildcard(_selectors);
 
-var _middlewares = __webpack_require__(9);
+var _middlewares = __webpack_require__(10);
 
 var _middlewares2 = _interopRequireDefault(_middlewares);
 
-var _actionCreators = __webpack_require__(10);
+var _actionCreators = __webpack_require__(11);
 
 var _actionCreators2 = _interopRequireDefault(_actionCreators);
 
@@ -527,11 +532,11 @@ var _pouchdb = __webpack_require__(16);
 
 var _pouchdb2 = _interopRequireDefault(_pouchdb);
 
-var _RKunafa = __webpack_require__(0);
+var _RKunafa = __webpack_require__(1);
 
 var _RKunafa2 = _interopRequireDefault(_RKunafa);
 
-var _store = __webpack_require__(5);
+var _store = __webpack_require__(6);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -723,7 +728,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.userLogout = exports.userLogin = exports.startLoading = exports.skipLogin = undefined;
 
-var _RKunafa = __webpack_require__(0);
+var _RKunafa = __webpack_require__(1);
 
 var _RKunafa2 = _interopRequireDefault(_RKunafa);
 
@@ -949,7 +954,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -957,19 +962,19 @@ var _server = __webpack_require__(23);
 
 var _server2 = _interopRequireDefault(_server);
 
-var _reactRedux = __webpack_require__(3);
+var _reactRedux = __webpack_require__(4);
 
 var _kunafaClient = __webpack_require__(2);
 
-var _selectors = __webpack_require__(6);
+var _selectors = __webpack_require__(7);
 
 var selectors = _interopRequireWildcard(_selectors);
 
-var _middlewares = __webpack_require__(9);
+var _middlewares = __webpack_require__(10);
 
 var _middlewares2 = _interopRequireDefault(_middlewares);
 
-var _actionCreators = __webpack_require__(10);
+var _actionCreators = __webpack_require__(11);
 
 var _actionCreators2 = _interopRequireDefault(_actionCreators);
 
@@ -1048,11 +1053,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(1);
+var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _connect = __webpack_require__(11);
+var _connect = __webpack_require__(3);
 
 var _connect2 = _interopRequireDefault(_connect);
 
@@ -1060,7 +1065,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var R = __webpack_require__(8);
+var R = __webpack_require__(9);
 
 var Authorize = function Authorize(_ref) {
   var children = _ref.children,
@@ -1087,6 +1092,71 @@ exports.default = (0, _connect2.default)(function (state, _ref2) {
     currentProfile: selectors.currentUserProfileSelector(state)
   };
 })(Authorize);
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _connect = __webpack_require__(3);
+
+var _connect2 = _interopRequireDefault(_connect);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var StaticContent = function (_Component) {
+  _inherits(StaticContent, _Component);
+
+  function StaticContent() {
+    _classCallCheck(this, StaticContent);
+
+    return _possibleConstructorReturn(this, (StaticContent.__proto__ || Object.getPrototypeOf(StaticContent)).apply(this, arguments));
+  }
+
+  _createClass(StaticContent, [{
+    key: "shouldComponentUpdate",
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      if (this.props.route !== nextProps.route) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return this.props.children;
+    }
+  }]);
+
+  return StaticContent;
+}(_react.Component);
+
+exports.default = (0, _connect2.default)(function (state, _ref) {
+  var selectors = _ref.selectors;
+
+  return {
+    route: state.history
+  };
+})(StaticContent);
 
 /***/ })
 /******/ ]);
