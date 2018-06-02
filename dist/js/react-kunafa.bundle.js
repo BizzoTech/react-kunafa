@@ -542,6 +542,8 @@ var _store2 = _interopRequireDefault(_store);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 exports.default = function (HOST, SSL) {
   var PROTCOL = SSL === "on" ? "https" : "http";
 
@@ -549,65 +551,163 @@ exports.default = function (HOST, SSL) {
   var outSyncHandler = undefined;
   var inSyncInterval = undefined;
 
-  var createSyncHandler = function createSyncHandler() {
-    var authCreds = _store2.default.get("authCreds");
-    var dbName = authCreds ? authCreds.profileId : "anonymous";
-    if (dbName === cachedDBName) {
-      return;
-    }
+  var createSyncHandler = function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+      var authCreds, dbName, authenticate, localDB, dbUrl, remoteDB, onSyncError;
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              authCreds = _store2.default.get("authCreds");
+              dbName = authCreds ? authCreds.profileId : "anonymous";
 
-    var localDB = new _pouchdb2.default(dbName, { auto_compaction: true });
+              if (!(dbName === cachedDBName)) {
+                _context3.next = 4;
+                break;
+              }
 
-    var dbUrl = authCreds ? PROTCOL + "://" + authCreds.username + ":" + authCreds.password + "@" + HOST + "/db" : PROTCOL + "://" + HOST + "/anonymous";
+              return _context3.abrupt("return");
 
-    var remoteDB = new _pouchdb2.default(dbUrl);
+            case 4:
+              authenticate = function () {
+                var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                  return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          if (authCreds) {
+                            _context.next = 2;
+                            break;
+                          }
 
-    if (outSyncHandler) {
-      outSyncHandler.cancel();
-    }
-    if (inSyncInterval) {
-      clearInterval(inSyncInterval);
-    }
+                          return _context.abrupt("return");
 
-    if (dbName === "anonymous") {
-      outSyncHandler = localDB.replicate.to(remoteDB, {
-        live: true,
-        retry: true
-      });
-    } else {
-      var onSyncError = function onSyncError(err) {
-        if (err && err.status === 401) {
-          //Unauthorized user
-          _RKunafa2.default.logout();
-          location.reload(); //FIXME
-        } else {
-          cachedDBName = undefined;
-        }
-      };
+                        case 2:
+                          _context.next = 4;
+                          return fetch(PROTCOL + "://" + HOST + "/_session", {
+                            method: "post",
+                            headers: {
+                              "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+                            },
+                            body: "name=" + authCreds.username + "&password=" + authCreds.password
+                          });
 
-      inSyncInterval = setInterval(function () {
-        localDB.replicate.from(remoteDB, {
-          selector: authCreds ? {
-            _id: {
-              $regex: "^" + authCreds.profileId
-            }
-          } : undefined
-        }).on("error", onSyncError);
-      }, 1000 * 60);
+                        case 4:
+                          return _context.abrupt("return", _context.sent);
 
-      outSyncHandler = localDB.replicate.to(remoteDB, {
-        live: true,
-        retry: false,
-        selector: authCreds ? {
-          _id: {
-            $regex: "^" + authCreds.profileId
+                        case 5:
+                        case "end":
+                          return _context.stop();
+                      }
+                    }
+                  }, _callee, undefined);
+                }));
+
+                return function authenticate() {
+                  return _ref2.apply(this, arguments);
+                };
+              }();
+
+              _context3.next = 7;
+              return authenticate();
+
+            case 7:
+              localDB = new _pouchdb2.default(dbName, { auto_compaction: true });
+              dbUrl = authCreds ? PROTCOL + "://" + HOST + "/db" : PROTCOL + "://" + HOST + "/anonymous";
+              remoteDB = new _pouchdb2.default(dbUrl);
+
+
+              if (outSyncHandler) {
+                outSyncHandler.cancel();
+              }
+              if (inSyncInterval) {
+                clearInterval(inSyncInterval);
+              }
+
+              if (dbName === "anonymous") {
+                outSyncHandler = localDB.replicate.to(remoteDB, {
+                  live: true,
+                  retry: true
+                });
+              } else {
+                onSyncError = function () {
+                  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(err) {
+                    var sessionRes;
+                    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                      while (1) {
+                        switch (_context2.prev = _context2.next) {
+                          case 0:
+                            if (!(err && err.status === 401)) {
+                              _context2.next = 7;
+                              break;
+                            }
+
+                            _context2.next = 3;
+                            return authenticate();
+
+                          case 3:
+                            sessionRes = _context2.sent;
+
+
+                            if (sessionRes.status === 401) {
+                              //Unauthorized user
+                              _RKunafa2.default.logout();
+                              location.reload(); //FIXME
+                            }
+                            _context2.next = 8;
+                            break;
+
+                          case 7:
+                            cachedDBName = undefined;
+
+                          case 8:
+                          case "end":
+                            return _context2.stop();
+                        }
+                      }
+                    }, _callee2, undefined);
+                  }));
+
+                  return function onSyncError(_x) {
+                    return _ref3.apply(this, arguments);
+                  };
+                }();
+
+                inSyncInterval = setInterval(function () {
+                  localDB.replicate.from(remoteDB, {
+                    selector: authCreds ? {
+                      _id: {
+                        $regex: "^" + authCreds.profileId
+                      }
+                    } : undefined
+                  }).on("error", onSyncError);
+                }, 1000 * 60);
+
+                outSyncHandler = localDB.replicate.to(remoteDB, {
+                  live: true,
+                  retry: false,
+                  selector: authCreds ? {
+                    _id: {
+                      $regex: "^" + authCreds.profileId
+                    }
+                  } : undefined
+                }).on("error", onSyncError);
+              }
+
+              cachedDBName = dbName;
+
+            case 14:
+            case "end":
+              return _context3.stop();
           }
-        } : undefined
-      }).on("error", onSyncError);
-    }
+        }
+      }, _callee3, undefined);
+    }));
 
-    cachedDBName = dbName;
-  };
+    return function createSyncHandler() {
+      return _ref.apply(this, arguments);
+    };
+  }();
 
   setInterval(createSyncHandler, 1000);
 

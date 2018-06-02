@@ -10,17 +10,30 @@ export default (HOST, SSL) => {
   let outSyncHandler = undefined;
   let inSyncInterval = undefined;
 
-  const createSyncHandler = () => {
+  const createSyncHandler = async () => {
     const authCreds = Storage.get("authCreds");
     const dbName = authCreds ? authCreds.profileId : "anonymous";
     if (dbName === cachedDBName) {
       return;
     }
 
+    const authenticate = async () => {
+      if (!authCreds) return;
+      return await fetch(`${PROTCOL}://${HOST}/_session`, {
+        method: "post",
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+        },
+        body: `name=${authCreds.username}&password=${authCreds.password}`
+      });
+    };
+
+    await authenticate();
+
     const localDB = new PouchDB(dbName, { auto_compaction: true });
 
     const dbUrl = authCreds
-      ? `${PROTCOL}://${authCreds.username}:${authCreds.password}@${HOST}/db`
+      ? `${PROTCOL}://${HOST}/db`
       : `${PROTCOL}://${HOST}/anonymous`;
 
     const remoteDB = new PouchDB(dbUrl);
@@ -38,11 +51,15 @@ export default (HOST, SSL) => {
         retry: true
       });
     } else {
-      const onSyncError = err => {
+      const onSyncError = async err => {
         if (err && err.status === 401) {
-          //Unauthorized user
-          RKunafa.logout();
-          location.reload(); //FIXME
+          const sessionRes = await authenticate();
+
+          if (sessionRes.status === 401) {
+            //Unauthorized user
+            RKunafa.logout();
+            location.reload(); //FIXME
+          }
         } else {
           cachedDBName = undefined;
         }
