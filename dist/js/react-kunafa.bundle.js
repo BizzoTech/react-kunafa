@@ -589,6 +589,7 @@ exports.default = function (HOST, SSL) {
                             headers: {
                               "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
                             },
+                            credentials: "same-origin",
                             body: "name=" + authCreds.username + "&password=" + authCreds.password
                           });
 
