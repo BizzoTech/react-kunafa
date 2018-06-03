@@ -67,30 +67,13 @@ export default (HOST, SSL) => {
       };
 
       inSyncInterval = setInterval(() => {
-        localDB.replicate
-          .from(remoteDB, {
-            selector: authCreds
-              ? {
-                  _id: {
-                    $regex: `^${authCreds.profileId}`
-                  }
-                }
-              : undefined
-          })
-          .on("error", onSyncError);
+        localDB.replicate.from(remoteDB).on("error", onSyncError);
       }, 1000 * 60);
 
       outSyncHandler = localDB.replicate
         .to(remoteDB, {
           live: true,
-          retry: false,
-          selector: authCreds
-            ? {
-                _id: {
-                  $regex: `^${authCreds.profileId}`
-                }
-              }
-            : undefined
+          retry: false
         })
         .on("error", onSyncError);
     }
