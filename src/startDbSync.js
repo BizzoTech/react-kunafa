@@ -68,7 +68,7 @@ export default (HOST, SSL) => {
 
       inSyncInterval = setInterval(() => {
         localDB.replicate.from(remoteDB).on("error", onSyncError);
-      }, 1000 * 60);
+      }, 1000 * 5);
 
       outSyncHandler = localDB.replicate
         .to(remoteDB, {

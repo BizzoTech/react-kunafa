@@ -676,7 +676,7 @@ exports.default = function (HOST, SSL) {
 
                 inSyncInterval = setInterval(function () {
                   localDB.replicate.from(remoteDB).on("error", onSyncError);
-                }, 1000 * 60);
+                }, 1000 * 5);
 
                 outSyncHandler = localDB.replicate.to(remoteDB, {
                   live: true,
