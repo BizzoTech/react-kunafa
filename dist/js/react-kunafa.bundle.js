@@ -674,14 +674,16 @@ exports.default = function (HOST, SSL) {
                   };
                 }();
 
-                inSyncInterval = setInterval(function () {
-                  localDB.replicate.from(remoteDB).on("error", onSyncError);
-                }, 1000 * 5);
+                localDB.replicate.from(remoteDB).on("error", onSyncError).on("complete", function () {
+                  inSyncInterval = setInterval(function () {
+                    localDB.replicate.from(remoteDB).on("error", onSyncError);
+                  }, 1000 * 5);
 
-                outSyncHandler = localDB.replicate.to(remoteDB, {
-                  live: true,
-                  retry: false
-                }).on("error", onSyncError);
+                  outSyncHandler = localDB.replicate.to(remoteDB, {
+                    live: true,
+                    retry: false
+                  }).on("error", onSyncError);
+                });
               }
 
               cachedDBName = dbName;
