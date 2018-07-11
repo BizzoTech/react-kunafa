@@ -1163,17 +1163,19 @@ var Authorize = function Authorize(_ref) {
   var children = _ref.children,
       allow = _ref.allow,
       loggedIn = _ref.loggedIn,
-      currentProfile = _ref.currentProfile;
+      currentProfile = _ref.currentProfile,
+      renderWhenNotAuthorized = _ref.renderWhenNotAuthorized,
+      renderWhenNotLoggedIn = _ref.renderWhenNotLoggedIn;
 
   if (!loggedIn) {
-    return null;
+    return renderWhenNotLoggedIn ? renderWhenNotLoggedIn() : renderWhenNotAuthorized ? renderWhenNotAuthorized() : null;
   }
   var allowedRoles = allow || ["user"];
   var roles = currentProfile.roles ? ["user"].concat(_toConsumableArray(currentProfile.roles)) : ["user"];
   if (roles.includes("admin") || R.intersection(allowedRoles, roles).length > 0) {
     return children;
   }
-  return null;
+  return renderWhenNotAuthorized ? renderWhenNotAuthorized() : null;
 };
 
 exports.default = (0, _connect2.default)(function (state, _ref2) {

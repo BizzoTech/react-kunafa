@@ -2,9 +2,18 @@ import React, { Component } from "react";
 import connect from "./connect";
 const R = require("ramda");
 
-const Authorize = ({ children, allow, loggedIn, currentProfile }) => {
+const Authorize = ({
+  children,
+  allow,
+  loggedIn,
+  currentProfile,
+  renderWhenNotAuthorized,
+  renderWhenNotLoggedIn
+}) => {
   if (!loggedIn) {
-    return null;
+    return renderWhenNotLoggedIn
+      ? renderWhenNotLoggedIn()
+      : renderWhenNotAuthorized ? renderWhenNotAuthorized() : null;
   }
   const allowedRoles = allow || ["user"];
   const roles = currentProfile.roles
@@ -16,7 +25,7 @@ const Authorize = ({ children, allow, loggedIn, currentProfile }) => {
   ) {
     return children;
   }
-  return null;
+  return renderWhenNotAuthorized ? renderWhenNotAuthorized() : null;
 };
 
 export default connect((state, { selectors }) => {
