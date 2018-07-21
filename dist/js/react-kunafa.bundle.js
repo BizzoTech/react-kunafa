@@ -616,19 +616,11 @@ exports.default = function (HOST, SSL) {
               localDB = new _pouchdb2.default(dbName, { auto_compaction: true });
               dbUrl = authCreds ? PROTCOL + "://" + HOST + "/db" : PROTCOL + "://" + HOST + "/anonymous";
               remoteDB = new _pouchdb2.default(dbUrl, {
-                fetch: function (_fetch) {
-                  function fetch(_x, _x2) {
-                    return _fetch.apply(this, arguments);
-                  }
-
-                  fetch.toString = function () {
-                    return _fetch.toString();
-                  };
-
-                  return fetch;
-                }(function (url, opts) {
-                  return fetch(url, Object.assign({}, opts, { credentials: "include" }));
-                })
+                fetch: function fetch(url, opts) {
+                  opts.headers.set('X-PouchDB', 'true');
+                  opt.credentials = 'include';
+                  return _pouchdb2.default.fetch(url, opts);
+                }
               });
 
 
@@ -683,7 +675,7 @@ exports.default = function (HOST, SSL) {
                     }, _callee2, undefined);
                   }));
 
-                  return function onSyncError(_x3) {
+                  return function onSyncError(_x) {
                     return _ref3.apply(this, arguments);
                   };
                 }();
