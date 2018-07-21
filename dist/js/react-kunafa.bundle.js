@@ -322,7 +322,7 @@ exports.default = Object.assign({}, authActions);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DynamicFont = exports.StaticContent = exports.Authorize = exports.connect = exports.createSsrApp = exports.createApp = undefined;
+exports.StaticContent = exports.Authorize = exports.connect = exports.createSsrApp = exports.createApp = undefined;
 
 var _createApp = __webpack_require__(13);
 
@@ -344,10 +344,6 @@ var _StaticContent = __webpack_require__(25);
 
 var _StaticContent2 = _interopRequireDefault(_StaticContent);
 
-var _DynamicFont = __webpack_require__(26);
-
-var _DynamicFont2 = _interopRequireDefault(_DynamicFont);
-
 var _RKunafa = __webpack_require__(1);
 
 var _RKunafa2 = _interopRequireDefault(_RKunafa);
@@ -360,7 +356,6 @@ exports.createSsrApp = _createSsrApp2.default;
 exports.connect = _connect2.default;
 exports.Authorize = _Authorize2.default;
 exports.StaticContent = _StaticContent2.default;
-exports.DynamicFont = _DynamicFont2.default;
 
 /***/ }),
 /* 13 */
@@ -620,7 +615,21 @@ exports.default = function (HOST, SSL) {
             case 7:
               localDB = new _pouchdb2.default(dbName, { auto_compaction: true });
               dbUrl = authCreds ? PROTCOL + "://" + HOST + "/db" : PROTCOL + "://" + HOST + "/anonymous";
-              remoteDB = new _pouchdb2.default(dbUrl);
+              remoteDB = new _pouchdb2.default(dbUrl, {
+                fetch: function (_fetch) {
+                  function fetch(_x, _x2) {
+                    return _fetch.apply(this, arguments);
+                  }
+
+                  fetch.toString = function () {
+                    return _fetch.toString();
+                  };
+
+                  return fetch;
+                }(function (url, opts) {
+                  return fetch(url, Object.assign({}, opts, { credentials: "include" }));
+                })
+              });
 
 
               if (outSyncHandler) {
@@ -674,7 +683,7 @@ exports.default = function (HOST, SSL) {
                     }, _callee2, undefined);
                   }));
 
-                  return function onSyncError(_x) {
+                  return function onSyncError(_x3) {
                     return _ref3.apply(this, arguments);
                   };
                 }();
@@ -1256,37 +1265,6 @@ exports.default = (0, _connect2.default)(function (state, _ref) {
     route: state.history
   };
 })(StaticContent);
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function DynamicFont(_ref) {
-  var text = _ref.text;
-
-  var arabic = /[\u0600-\u06FF]/;
-  var arabicText = text ? arabic.test(text) : false;
-  return _react2.default.createElement(
-    'span',
-    { className: arabicText ? 'arabic-font' : 'latin-font' },
-    text
-  );
-}
-
-exports.default = DynamicFont;
 
 /***/ })
 /******/ ]);

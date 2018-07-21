@@ -37,7 +37,9 @@ export default (HOST, SSL) => {
       ? `${PROTCOL}://${HOST}/db`
       : `${PROTCOL}://${HOST}/anonymous`;
 
-    const remoteDB = new PouchDB(dbUrl);
+    const remoteDB = new PouchDB(dbUrl, {
+      fetch: (url, opts) => fetch(url, { ...opts, credentials: "include" })
+    });
 
     if (outSyncHandler) {
       outSyncHandler.cancel();
