@@ -40,7 +40,7 @@ export default (HOST, SSL) => {
     const remoteDB = new PouchDB(dbUrl, {
       fetch: (url, opts) => {
         opts.headers.set("X-PouchDB", "true");
-        opt.credentials = "include";
+        opts.credentials = "include";
         return PouchDB.fetch(url, opts);
       }
     });

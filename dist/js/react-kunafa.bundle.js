@@ -617,8 +617,8 @@ exports.default = function (HOST, SSL) {
               dbUrl = authCreds ? PROTCOL + "://" + HOST + "/db" : PROTCOL + "://" + HOST + "/anonymous";
               remoteDB = new _pouchdb2.default(dbUrl, {
                 fetch: function fetch(url, opts) {
-                  opts.headers.set('X-PouchDB', 'true');
-                  opt.credentials = 'include';
+                  opts.headers.set("X-PouchDB", "true");
+                  opts.credentials = "include";
                   return _pouchdb2.default.fetch(url, opts);
                 }
               });
