@@ -711,7 +711,13 @@ exports.default = function (HOST, SSL) {
 
   var localSharedDB = new _pouchdb2.default("shared", { auto_compaction: true });
   var sharedDbUrl = PROTCOL + "://" + HOST + "/shared";
-  var remoteSharedDB = new _pouchdb2.default(sharedDbUrl);
+  var remoteSharedDB = new _pouchdb2.default(sharedDbUrl, {
+    fetch: function fetch(url, opts) {
+      opts.headers.set("X-PouchDB", "true");
+      opts.credentials = "include";
+      return _pouchdb2.default.fetch(url, opts);
+    }
+  });
 
   var syncShared = function syncShared() {
     localSharedDB.replicate.from(remoteSharedDB);

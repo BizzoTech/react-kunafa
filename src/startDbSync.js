@@ -96,7 +96,13 @@ export default (HOST, SSL) => {
 
   const localSharedDB = new PouchDB("shared", { auto_compaction: true });
   const sharedDbUrl = `${PROTCOL}://${HOST}/shared`;
-  const remoteSharedDB = new PouchDB(sharedDbUrl);
+  const remoteSharedDB = new PouchDB(sharedDbUrl, {
+    fetch: (url, opts) => {
+      opts.headers.set("X-PouchDB", "true");
+      opts.credentials = "include";
+      return PouchDB.fetch(url, opts);
+    }
+  });
 
   const syncShared = () => {
     localSharedDB.replicate.from(remoteSharedDB);
