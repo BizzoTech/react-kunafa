@@ -683,10 +683,12 @@ exports.default = function (HOST, SSL) {
                 startTime = Date.now();
 
                 console.log("Initial Replication started at", new Date(startTime));
-                localDB.replicate.from(remoteDB).on("error", onSyncError).on("complete", function () {
+                localDB.replicate.from(remoteDB, {
+                  batch_size: 1000
+                }).on("error", onSyncError).on("complete", function () {
                   var endTime = Date.now();
                   console.log("Initial Replication ended at", new Date(endTime));
-                  consoloe.log("Initial load took ", (endTime - startTime) / 1000, " seconds");
+                  console.log("Initial load took ", (endTime - startTime) / 1000);
                   inSyncInterval = setInterval(function () {
                     localDB.replicate.from(remoteDB).on("error", onSyncError);
                   }, 1000 * 5);
