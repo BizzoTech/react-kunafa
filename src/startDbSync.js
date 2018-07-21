@@ -71,11 +71,19 @@ export default (HOST, SSL) => {
           cachedDBName = undefined;
         }
       };
-
+      const startTime = Date.now();
+      console.log("Initial Replication started at", new Date(startTime));
       localDB.replicate
         .from(remoteDB)
         .on("error", onSyncError)
         .on("complete", () => {
+          const endTime = Date.now();
+          console.log("Initial Replication ended at", new Date(endTime));
+          consoloe.log(
+            "Initial load took ",
+            (endTime - startTime) / 1000,
+            " seconds"
+          );
           inSyncInterval = setInterval(() => {
             localDB.replicate.from(remoteDB).on("error", onSyncError);
           }, 1000 * 5);

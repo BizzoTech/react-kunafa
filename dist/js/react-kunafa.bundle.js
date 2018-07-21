@@ -553,7 +553,7 @@ exports.default = function (HOST, SSL) {
 
   var createSyncHandler = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-      var authCreds, dbName, authenticate, localDB, dbUrl, remoteDB, onSyncError;
+      var authCreds, dbName, authenticate, localDB, dbUrl, remoteDB, onSyncError, startTime;
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
@@ -680,7 +680,13 @@ exports.default = function (HOST, SSL) {
                   };
                 }();
 
+                startTime = Date.now();
+
+                console.log("Initial Replication started at", new Date(startTime));
                 localDB.replicate.from(remoteDB).on("error", onSyncError).on("complete", function () {
+                  var endTime = Date.now();
+                  console.log("Initial Replication ended at", new Date(endTime));
+                  consoloe.log("Initial load took ", (endTime - startTime) / 1000, " seconds");
                   inSyncInterval = setInterval(function () {
                     localDB.replicate.from(remoteDB).on("error", onSyncError);
                   }, 1000 * 5);
