@@ -8,7 +8,7 @@ export default (HOST, SSL) => {
 
   let cachedDBName = undefined;
   let outSyncHandler = undefined;
-  let inSyncInterval = undefined;
+  let inSyncTimeout = undefined;
 
   const createSyncHandler = async () => {
     const authCreds = Storage.get("authCreds");
@@ -48,8 +48,8 @@ export default (HOST, SSL) => {
     if (outSyncHandler) {
       outSyncHandler.cancel();
     }
-    if (inSyncInterval) {
-      clearInterval(inSyncInterval);
+    if (inSyncTimeout) {
+      clearTimeout(inSyncTimeout);
     }
 
     if (dbName === "anonymous") {
@@ -74,17 +74,21 @@ export default (HOST, SSL) => {
       const startTime = Date.now();
       console.log("Initial Replication started at", new Date(startTime));
       localDB.replicate
-        .from(remoteDB, {
-          batch_size: 1000
-        })
+        .from(remoteDB)
         .on("error", onSyncError)
         .on("complete", () => {
           const endTime = Date.now();
           console.log("Initial Replication ended at", new Date(endTime));
           console.log("Initial load took ", (endTime - startTime) / 1000);
-          inSyncInterval = setInterval(() => {
-            localDB.replicate.from(remoteDB).on("error", onSyncError);
-          }, 1000 * 5);
+
+          const replicateFromRemote = () => {
+            localDB.replicate
+              .from(remoteDB)
+              .on("error", onSyncError)
+              .on("complete", () => {
+                inSyncTimeout = setTimeout(replicateFromRemote, 5000);
+              });
+          };
 
           outSyncHandler = localDB.replicate
             .to(remoteDB, {
@@ -98,7 +102,7 @@ export default (HOST, SSL) => {
     cachedDBName = dbName;
   };
 
-  setInterval(createSyncHandler, 1000);
+  //setInterval(createSyncHandler, 1000);
 
   const localSharedDB = new PouchDB("shared", { auto_compaction: true });
   const sharedDbUrl = `${PROTCOL}://${HOST}/shared`;
@@ -110,11 +114,50 @@ export default (HOST, SSL) => {
     }
   });
 
-  const syncShared = () => {
-    localSharedDB.replicate.from(remoteSharedDB);
+  const syncShared = async () => {
+    await localSharedDB.replicate.from(remoteSharedDB);
   };
 
-  syncShared();
-  const syncSharedInterval = 1 * 1000 * 60;
-  setInterval(syncShared, syncSharedInterval);
+  // syncShared();
+  // const syncSharedInterval = 1 * 1000 * 60;
+  // setInterval(syncShared, syncSharedInterval);
+
+  let mainSyncInterval;
+  let sharedSyncInterval;
+
+  return {
+    start: async () => {
+      if (mainSyncInterval) {
+        clearInterval(mainSyncInterval);
+      }
+      await createSyncHandler();
+      mainSyncInterval = setInterval(createSyncHandler, 10000);
+
+      if (sharedSyncInterval) {
+        clearInterval(sharedSyncInterval);
+      }
+      await syncShared();
+      const syncSharedIntervalPeriod = 1 * 1000 * 60;
+      sharedSyncInterval = setInterval(syncShared, syncSharedIntervalPeriod);
+    },
+    stop: () => {
+      if (mainSyncInterval) {
+        clearInterval(mainSyncInterval);
+      }
+      if (sharedSyncInterval) {
+        clearInterval(sharedSyncInterval);
+      }
+      if (outSyncHandler) {
+        outSyncHandler.cancel();
+      }
+      if (inSyncTimeout) {
+        clearTimeout(inSyncTimeout);
+      }
+      mainSyncInterval = undefined;
+      sharedSyncInterval = undefined;
+      outSyncHandler = undefined;
+      inSyncTimeout = undefined;
+      cachedDBName = undefined;
+    }
+  };
 };

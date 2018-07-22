@@ -40,7 +40,8 @@ export default (name, MAIN, appConfig) => {
     isConnected: async () => {
       return await navigator.onLine;
     },
-    startDbSync: () => startDbSync(appConfig.HOST, appConfig.SSL),
+    //startDbSync: () => startDbSync(appConfig.HOST, appConfig.SSL),
+    dbSyncObj: startDbSync(appConfig.HOST, appConfig.SSL),
     ...appConfig,
     actionCreators: {
       ...appConfig.actionCreators,

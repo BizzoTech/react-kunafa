@@ -384,9 +384,9 @@ var _RKunafa = __webpack_require__(1);
 
 var _RKunafa2 = _interopRequireDefault(_RKunafa);
 
-var _startDbSync2 = __webpack_require__(15);
+var _startDbSync = __webpack_require__(15);
 
-var _startDbSync3 = _interopRequireDefault(_startDbSync2);
+var _startDbSync2 = _interopRequireDefault(_startDbSync);
 
 var _deviceInfo = __webpack_require__(17);
 
@@ -482,9 +482,8 @@ exports.default = function (name, MAIN, appConfig) {
         return _ref.apply(this, arguments);
       };
     }(),
-    startDbSync: function startDbSync() {
-      return (0, _startDbSync3.default)(appConfig.HOST, appConfig.SSL);
-    }
+    //startDbSync: () => startDbSync(appConfig.HOST, appConfig.SSL),
+    dbSyncObj: (0, _startDbSync2.default)(appConfig.HOST, appConfig.SSL)
   }, appConfig, {
     actionCreators: Object.assign({}, appConfig.actionCreators, _actionCreators2.default),
     selectors: Object.assign({}, appConfig.selectors, selectors),
@@ -563,7 +562,7 @@ exports.default = function (HOST, SSL) {
 
   var cachedDBName = undefined;
   var outSyncHandler = undefined;
-  var inSyncInterval = undefined;
+  var inSyncTimeout = undefined;
 
   var createSyncHandler = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
@@ -641,8 +640,8 @@ exports.default = function (HOST, SSL) {
               if (outSyncHandler) {
                 outSyncHandler.cancel();
               }
-              if (inSyncInterval) {
-                clearInterval(inSyncInterval);
+              if (inSyncTimeout) {
+                clearTimeout(inSyncTimeout);
               }
 
               if (dbName === "anonymous") {
@@ -697,15 +696,16 @@ exports.default = function (HOST, SSL) {
                 startTime = Date.now();
 
                 console.log("Initial Replication started at", new Date(startTime));
-                localDB.replicate.from(remoteDB, {
-                  batch_size: 1000
-                }).on("error", onSyncError).on("complete", function () {
+                localDB.replicate.from(remoteDB).on("error", onSyncError).on("complete", function () {
                   var endTime = Date.now();
                   console.log("Initial Replication ended at", new Date(endTime));
                   console.log("Initial load took ", (endTime - startTime) / 1000);
-                  inSyncInterval = setInterval(function () {
-                    localDB.replicate.from(remoteDB).on("error", onSyncError);
-                  }, 1000 * 5);
+
+                  var replicateFromRemote = function replicateFromRemote() {
+                    localDB.replicate.from(remoteDB).on("error", onSyncError).on("complete", function () {
+                      inSyncTimeout = setTimeout(replicateFromRemote, 5000);
+                    });
+                  };
 
                   outSyncHandler = localDB.replicate.to(remoteDB, {
                     live: true,
@@ -729,7 +729,7 @@ exports.default = function (HOST, SSL) {
     };
   }();
 
-  setInterval(createSyncHandler, 1000);
+  //setInterval(createSyncHandler, 1000);
 
   var localSharedDB = new _pouchdb2.default("shared", { auto_compaction: true });
   var sharedDbUrl = PROTCOL + "://" + HOST + "/shared";
@@ -741,13 +741,95 @@ exports.default = function (HOST, SSL) {
     }
   });
 
-  var syncShared = function syncShared() {
-    localSharedDB.replicate.from(remoteSharedDB);
-  };
+  var syncShared = function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return localSharedDB.replicate.from(remoteSharedDB);
 
-  syncShared();
-  var syncSharedInterval = 1 * 1000 * 60;
-  setInterval(syncShared, syncSharedInterval);
+            case 2:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4, undefined);
+    }));
+
+    return function syncShared() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  // syncShared();
+  // const syncSharedInterval = 1 * 1000 * 60;
+  // setInterval(syncShared, syncSharedInterval);
+
+  var mainSyncInterval = void 0;
+  var sharedSyncInterval = void 0;
+
+  return {
+    start: function () {
+      var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+        var syncSharedIntervalPeriod;
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                if (mainSyncInterval) {
+                  clearInterval(mainSyncInterval);
+                }
+                _context5.next = 3;
+                return createSyncHandler();
+
+              case 3:
+                mainSyncInterval = setInterval(createSyncHandler, 10000);
+
+                if (sharedSyncInterval) {
+                  clearInterval(sharedSyncInterval);
+                }
+                _context5.next = 7;
+                return syncShared();
+
+              case 7:
+                syncSharedIntervalPeriod = 1 * 1000 * 60;
+
+                sharedSyncInterval = setInterval(syncShared, syncSharedIntervalPeriod);
+
+              case 9:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, undefined);
+      }));
+
+      return function start() {
+        return _ref5.apply(this, arguments);
+      };
+    }(),
+    stop: function stop() {
+      if (mainSyncInterval) {
+        clearInterval(mainSyncInterval);
+      }
+      if (sharedSyncInterval) {
+        clearInterval(sharedSyncInterval);
+      }
+      if (outSyncHandler) {
+        outSyncHandler.cancel();
+      }
+      if (inSyncTimeout) {
+        clearTimeout(inSyncTimeout);
+      }
+      mainSyncInterval = undefined;
+      sharedSyncInterval = undefined;
+      outSyncHandler = undefined;
+      inSyncTimeout = undefined;
+      cachedDBName = undefined;
+    }
+  };
 };
 
 /***/ }),
