@@ -384,9 +384,9 @@ var _RKunafa = __webpack_require__(1);
 
 var _RKunafa2 = _interopRequireDefault(_RKunafa);
 
-var _startDbSync = __webpack_require__(15);
+var _startDbSync2 = __webpack_require__(15);
 
-var _startDbSync2 = _interopRequireDefault(_startDbSync);
+var _startDbSync3 = _interopRequireDefault(_startDbSync2);
 
 var _deviceInfo = __webpack_require__(17);
 
@@ -447,7 +447,7 @@ var App = function (_Component) {
 }(_react.Component);
 
 exports.default = function (name, MAIN, appConfig) {
-  (0, _startDbSync2.default)(appConfig.HOST, appConfig.SSL);
+  //startDbSync(appConfig.HOST, appConfig.SSL);
 
   var profileId = _RKunafa2.default.getProfileId();
 
@@ -481,7 +481,10 @@ exports.default = function (name, MAIN, appConfig) {
       return function isConnected() {
         return _ref.apply(this, arguments);
       };
-    }()
+    }(),
+    startDbSync: function startDbSync() {
+      return (0, _startDbSync3.default)(appConfig.HOST, appConfig.SSL);
+    }
   }, appConfig, {
     actionCreators: Object.assign({}, appConfig.actionCreators, _actionCreators2.default),
     selectors: Object.assign({}, appConfig.selectors, selectors),

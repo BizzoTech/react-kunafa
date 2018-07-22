@@ -26,7 +26,7 @@ class App extends Component {
 }
 
 export default (name, MAIN, appConfig) => {
-  startDbSync(appConfig.HOST, appConfig.SSL);
+  //startDbSync(appConfig.HOST, appConfig.SSL);
 
   const profileId = RKunafa.getProfileId();
 
@@ -40,6 +40,7 @@ export default (name, MAIN, appConfig) => {
     isConnected: async () => {
       return await navigator.onLine;
     },
+    startDbSync: () => startDbSync(appConfig.HOST, appConfig.SSL),
     ...appConfig,
     actionCreators: {
       ...appConfig.actionCreators,
