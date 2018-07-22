@@ -496,7 +496,18 @@ exports.default = function (name, MAIN, appConfig) {
 
     // Allow the passed state to be garbage-collected
     delete window.__PRELOADED_STATE__;
-    var AppStore = (0, _kunafaClient.createStore)(config, preloadedState);
+
+    var defaultState = preloadedState;
+
+    if (profileId) {
+      defaultState = Object.assign({}, preloadedState, {
+        currentProfile: {
+          _id: profileId
+        }
+      });
+    }
+
+    var AppStore = (0, _kunafaClient.createStore)(config, defaultState);
 
     (0, _reactDom.hydrate)(_react2.default.createElement(App, { store: AppStore, main: MAIN }), document.getElementById("root"));
     if (profileId) {

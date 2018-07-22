@@ -60,7 +60,19 @@ export default (name, MAIN, appConfig) => {
 
     // Allow the passed state to be garbage-collected
     delete window.__PRELOADED_STATE__;
-    const AppStore = createStore(config, preloadedState);
+
+    let defaultState = preloadedState;
+
+    if (profileId) {
+      defaultState = {
+        ...preloadedState,
+        currentProfile: {
+          _id: profileId
+        }
+      };
+    }
+
+    const AppStore = createStore(config, defaultState);
 
     hydrate(
       <App store={AppStore} main={MAIN} />,
