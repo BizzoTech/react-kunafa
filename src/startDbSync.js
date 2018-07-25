@@ -89,6 +89,7 @@ export default (HOST, SSL) => {
                 inSyncTimeout = setTimeout(replicateFromRemote, 5000);
               });
           };
+          replicateFromRemote();
 
           outSyncHandler = localDB.replicate
             .to(remoteDB, {
