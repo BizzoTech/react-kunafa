@@ -59,16 +59,14 @@ export default (HOST, SSL) => {
       });
     } else {
       const onSyncError = async err => {
-        if (err && err.status === 401) {
-          const sessionRes = await authenticate();
+        const sessionRes = await authenticate();
 
-          if (sessionRes.status === 401) {
-            //Unauthorized user
-            RKunafa.logout();
-            location.reload(); //FIXME
-          }
+        if (sessionRes.status === 401) {
+          //Unauthorized user
+          RKunafa.logout();
+          location.reload(); //FIXME
         } else {
-          cachedDBName = undefined;
+          console.log(err);
         }
       };
       const startTime = Date.now();

@@ -696,15 +696,10 @@ exports.default = function (HOST, SSL) {
                       while (1) {
                         switch (_context2.prev = _context2.next) {
                           case 0:
-                            if (!(err && err.status === 401)) {
-                              _context2.next = 7;
-                              break;
-                            }
-
-                            _context2.next = 3;
+                            _context2.next = 2;
                             return authenticate();
 
-                          case 3:
+                          case 2:
                             sessionRes = _context2.sent;
 
 
@@ -712,14 +707,11 @@ exports.default = function (HOST, SSL) {
                               //Unauthorized user
                               _RKunafa2.default.logout();
                               location.reload(); //FIXME
+                            } else {
+                              console.log(err);
                             }
-                            _context2.next = 8;
-                            break;
 
-                          case 7:
-                            cachedDBName = undefined;
-
-                          case 8:
+                          case 4:
                           case "end":
                             return _context2.stop();
                         }
