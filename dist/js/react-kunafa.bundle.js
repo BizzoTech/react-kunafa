@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"), require("kunafa-client"), require("react-redux"), require("store2"), require("i18n-js"), require("ramda"), require("react-dom"), require("pouchdb"), require("platform"), require("reselect"), require("react-dom/server"));
+		module.exports = factory(require("react"), require("store2"), require("kunafa-client"), require("react-redux"), require("i18n-js"), require("ramda"), require("react-dom"), require("uuid"), require("pouchdb"), require("platform"), require("reselect"), require("react-dom/server"));
 	else if(typeof define === 'function' && define.amd)
-		define("reactKunafa", ["react", "kunafa-client", "react-redux", "store2", "i18n-js", "ramda", "react-dom", "pouchdb", "platform", "reselect", "react-dom/server"], factory);
+		define("reactKunafa", ["react", "store2", "kunafa-client", "react-redux", "i18n-js", "ramda", "react-dom", "uuid", "pouchdb", "platform", "reselect", "react-dom/server"], factory);
 	else if(typeof exports === 'object')
-		exports["reactKunafa"] = factory(require("react"), require("kunafa-client"), require("react-redux"), require("store2"), require("i18n-js"), require("ramda"), require("react-dom"), require("pouchdb"), require("platform"), require("reselect"), require("react-dom/server"));
+		exports["reactKunafa"] = factory(require("react"), require("store2"), require("kunafa-client"), require("react-redux"), require("i18n-js"), require("ramda"), require("react-dom"), require("uuid"), require("pouchdb"), require("platform"), require("reselect"), require("react-dom/server"));
 	else
-		root["reactKunafa"] = factory(root["react"], root["kunafa-client"], root["react-redux"], root["store2"], root["i18n-js"], root["ramda"], root["react-dom"], root["pouchdb"], root["platform"], root["reselect"], root["react-dom/server"]);
-})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__, __WEBPACK_EXTERNAL_MODULE_14__, __WEBPACK_EXTERNAL_MODULE_16__, __WEBPACK_EXTERNAL_MODULE_18__, __WEBPACK_EXTERNAL_MODULE_19__, __WEBPACK_EXTERNAL_MODULE_23__) {
+		root["reactKunafa"] = factory(root["react"], root["store2"], root["kunafa-client"], root["react-redux"], root["i18n-js"], root["ramda"], root["react-dom"], root["uuid"], root["pouchdb"], root["platform"], root["reselect"], root["react-dom/server"]);
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__, __WEBPACK_EXTERNAL_MODULE_14__, __WEBPACK_EXTERNAL_MODULE_15__, __WEBPACK_EXTERNAL_MODULE_17__, __WEBPACK_EXTERNAL_MODULE_19__, __WEBPACK_EXTERNAL_MODULE_20__, __WEBPACK_EXTERNAL_MODULE_24__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -90,7 +90,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _cacheStore = __webpack_require__(5);
+var _cacheStore = __webpack_require__(6);
 
 var _cacheStore2 = _interopRequireDefault(_cacheStore);
 
@@ -127,6 +127,12 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -136,7 +142,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _kunafaClient = __webpack_require__(2);
+var _kunafaClient = __webpack_require__(3);
 
 var _i18nJs = __webpack_require__(8);
 
@@ -164,13 +170,13 @@ var connect = function connect(mapStateToProps, mapDispatchToProps) {
 exports.default = connect;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
+module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -180,7 +186,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _store = __webpack_require__(6);
+var _store = __webpack_require__(2);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -218,12 +224,6 @@ exports.default = {
 };
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
-
-/***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -235,7 +235,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.translationsSelector = exports.sharedDocsSelector = undefined;
 
-var _reselect = __webpack_require__(19);
+var _reselect = __webpack_require__(20);
 
 var _i18nJs = __webpack_require__(8);
 
@@ -285,7 +285,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _navigationMiddleware = __webpack_require__(20);
+var _navigationMiddleware = __webpack_require__(21);
 
 var _navigationMiddleware2 = _interopRequireDefault(_navigationMiddleware);
 
@@ -304,7 +304,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _auth = __webpack_require__(21);
+var _auth = __webpack_require__(22);
 
 var authActions = _interopRequireWildcard(_auth);
 
@@ -328,19 +328,19 @@ var _createApp = __webpack_require__(13);
 
 var _createApp2 = _interopRequireDefault(_createApp);
 
-var _createSsrApp = __webpack_require__(22);
+var _createSsrApp = __webpack_require__(23);
 
 var _createSsrApp2 = _interopRequireDefault(_createSsrApp);
 
-var _connect = __webpack_require__(3);
+var _connect = __webpack_require__(4);
 
 var _connect2 = _interopRequireDefault(_connect);
 
-var _Authorize = __webpack_require__(24);
+var _Authorize = __webpack_require__(25);
 
 var _Authorize2 = _interopRequireDefault(_Authorize);
 
-var _StaticContent = __webpack_require__(25);
+var _StaticContent = __webpack_require__(26);
 
 var _StaticContent2 = _interopRequireDefault(_StaticContent);
 
@@ -376,23 +376,31 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = __webpack_require__(14);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(5);
 
-var _kunafaClient = __webpack_require__(2);
+var _uuid = __webpack_require__(15);
+
+var _uuid2 = _interopRequireDefault(_uuid);
+
+var _store = __webpack_require__(2);
+
+var _store2 = _interopRequireDefault(_store);
+
+var _kunafaClient = __webpack_require__(3);
 
 var _RKunafa = __webpack_require__(1);
 
 var _RKunafa2 = _interopRequireDefault(_RKunafa);
 
-var _startDbSync = __webpack_require__(15);
+var _startDbSync = __webpack_require__(16);
 
 var _startDbSync2 = _interopRequireDefault(_startDbSync);
 
-var _deviceInfo = __webpack_require__(17);
+var _deviceInfo = __webpack_require__(18);
 
 var _deviceInfo2 = _interopRequireDefault(_deviceInfo);
 
-var _cacheStore = __webpack_require__(5);
+var _cacheStore = __webpack_require__(6);
 
 var _cacheStore2 = _interopRequireDefault(_cacheStore);
 
@@ -412,9 +420,9 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -445,6 +453,30 @@ var App = function (_Component) {
 
   return App;
 }(_react.Component);
+
+var tabId = _uuid2.default.v4();
+
+var refreshTabs = function refreshTabs() {
+  var activeTabs = _store2.default.get("activeTabs") || [];
+  var filteredTabs = activeTabs.filter(function (tab) {
+    return tab.id !== tabId && tab.time > Date.now() - 2000;
+  });
+  _store2.default.set("activeTabs", [].concat(_toConsumableArray(filteredTabs), [{
+    id: tabId,
+    time: Date.now()
+  }]));
+};
+
+refreshTabs();
+setInterval(refreshTabs, 1000);
+
+var isOpenInOtherTab = function isOpenInOtherTab() {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      resolve(_store2.default.get("activeTabs") && _store2.default.get("activeTabs").length > 1);
+    }, 2500);
+  });
+};
 
 exports.default = function (name, MAIN, appConfig) {
   //startDbSync(appConfig.HOST, appConfig.SSL);
@@ -483,7 +515,8 @@ exports.default = function (name, MAIN, appConfig) {
       };
     }(),
     //startDbSync: () => startDbSync(appConfig.HOST, appConfig.SSL),
-    dbSyncObj: (0, _startDbSync2.default)(appConfig.HOST, appConfig.SSL)
+    dbSyncObj: (0, _startDbSync2.default)(appConfig.HOST, appConfig.SSL),
+    isOpenInOtherTab: isOpenInOtherTab
   }, appConfig, {
     actionCreators: Object.assign({}, appConfig.actionCreators, _actionCreators2.default),
     selectors: Object.assign({}, appConfig.selectors, selectors),
@@ -532,6 +565,12 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_14__;
 
 /***/ }),
 /* 15 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_15__;
+
+/***/ }),
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -541,7 +580,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _pouchdb = __webpack_require__(16);
+var _pouchdb = __webpack_require__(17);
 
 var _pouchdb2 = _interopRequireDefault(_pouchdb);
 
@@ -549,7 +588,7 @@ var _RKunafa = __webpack_require__(1);
 
 var _RKunafa2 = _interopRequireDefault(_RKunafa);
 
-var _store = __webpack_require__(6);
+var _store = __webpack_require__(2);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -834,13 +873,13 @@ exports.default = function (HOST, SSL) {
 };
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_16__;
+module.exports = __WEBPACK_EXTERNAL_MODULE_17__;
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -850,7 +889,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _platform = __webpack_require__(18);
+var _platform = __webpack_require__(19);
 
 var _platform2 = _interopRequireDefault(_platform);
 
@@ -869,12 +908,6 @@ exports.default = {
 };
 
 /***/ }),
-/* 18 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_18__;
-
-/***/ }),
 /* 19 */
 /***/ (function(module, exports) {
 
@@ -882,6 +915,12 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_19__;
 
 /***/ }),
 /* 20 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_20__;
+
+/***/ }),
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -926,7 +965,7 @@ exports.default = function (store, config) {
 };
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1151,7 +1190,7 @@ var userLogout = exports.userLogout = function userLogout() {
 };
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1167,13 +1206,13 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _server = __webpack_require__(23);
+var _server = __webpack_require__(24);
 
 var _server2 = _interopRequireDefault(_server);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(5);
 
-var _kunafaClient = __webpack_require__(2);
+var _kunafaClient = __webpack_require__(3);
 
 var _selectors = __webpack_require__(7);
 
@@ -1246,13 +1285,13 @@ exports.default = function (name, MAIN, appConfig) {
 };
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_23__;
+module.exports = __WEBPACK_EXTERNAL_MODULE_24__;
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1266,7 +1305,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _connect = __webpack_require__(3);
+var _connect = __webpack_require__(4);
 
 var _connect2 = _interopRequireDefault(_connect);
 
@@ -1305,7 +1344,7 @@ exports.default = (0, _connect2.default)(function (state, _ref2) {
 })(Authorize);
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1321,7 +1360,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _connect = __webpack_require__(3);
+var _connect = __webpack_require__(4);
 
 var _connect2 = _interopRequireDefault(_connect);
 

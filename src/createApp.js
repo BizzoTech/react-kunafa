@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { render, hydrate } from "react-dom";
 import { Provider } from "react-redux";
 
+import uuid from "uuid";
+import Storage from "store2";
+
 import { createStore } from "kunafa-client";
 import RKunafa from "./RKunafa";
 
@@ -25,6 +28,34 @@ class App extends Component {
   }
 }
 
+const tabId = uuid.v4();
+
+const refreshTabs = () => {
+  const activeTabs = Storage.get("activeTabs") || [];
+  const filteredTabs = activeTabs.filter(
+    tab => tab.id !== tabId && tab.time > Date.now() - 2000
+  );
+  Storage.set("activeTabs", [
+    ...filteredTabs,
+    {
+      id: tabId,
+      time: Date.now()
+    }
+  ]);
+};
+
+refreshTabs();
+setInterval(refreshTabs, 1000);
+
+const isOpenInOtherTab = () =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(
+        Storage.get("activeTabs") && Storage.get("activeTabs").length > 1
+      );
+    }, 2500);
+  });
+
 export default (name, MAIN, appConfig) => {
   //startDbSync(appConfig.HOST, appConfig.SSL);
 
@@ -42,6 +73,7 @@ export default (name, MAIN, appConfig) => {
     },
     //startDbSync: () => startDbSync(appConfig.HOST, appConfig.SSL),
     dbSyncObj: startDbSync(appConfig.HOST, appConfig.SSL),
+    isOpenInOtherTab,
     ...appConfig,
     actionCreators: {
       ...appConfig.actionCreators,
