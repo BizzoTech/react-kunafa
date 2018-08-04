@@ -937,6 +937,16 @@ exports.default = function (store, config) {
     var route = pathToRoute(path);
     next(config.actionCreators.goTo(route.path, route.params));
     window.addEventListener("popstate", function (event) {
+      var state = store.getState();
+      if (state.dialog.name) {
+        next(config.actionCreators.closeDialog());
+        var currentRoute = {
+          path: state.history.path
+        };
+        history.pushState(currentRoute, "", routeToPath(currentRoute));
+        return;
+      }
+
       var path = document.location.pathname;
       var route = pathToRoute(path);
       next(config.actionCreators.goTo(route.path, route.params));

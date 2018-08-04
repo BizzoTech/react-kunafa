@@ -13,6 +13,16 @@ export default (store, config) => next => {
   const route = pathToRoute(path);
   next(config.actionCreators.goTo(route.path, route.params));
   window.addEventListener("popstate", function(event) {
+    const state = store.getState();
+    if (state.dialog.name) {
+      next(config.actionCreators.closeDialog());
+      const currentRoute = {
+        path: state.history.path
+      };
+      history.pushState(currentRoute, "", routeToPath(currentRoute));
+      return;
+    }
+
     const path = document.location.pathname;
     const route = pathToRoute(path);
     next(config.actionCreators.goTo(route.path, route.params));
