@@ -603,6 +603,8 @@ exports.default = function (HOST, SSL) {
   var outSyncHandler = undefined;
   var inSyncTimeout = undefined;
 
+  var errorCount = 0;
+
   var createSyncHandler = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
       var authCreds, dbName, authenticate, localDB, dbUrl, remoteDB, onSyncError, startTime;
@@ -709,6 +711,21 @@ exports.default = function (HOST, SSL) {
                               location.reload(); //FIXME
                             } else {
                               console.log(err);
+                              if (outSyncHandler) {
+                                outSyncHandler.cancel();
+                                outSyncHandler = undefined;
+                              }
+                              if (inSyncTimeout) {
+                                clearTimeout(inSyncTimeout);
+                                inSyncTimeout = undefined;
+                              }
+                              cachedDBName = undefined;
+                              errorCount += 1;
+                              console.log(errorCount);
+                              if (errorCount > 20) {
+                                _RKunafa2.default.logout();
+                                location.reload(); //FIXME
+                              }
                             }
 
                           case 4:

@@ -10,6 +10,8 @@ export default (HOST, SSL) => {
   let outSyncHandler = undefined;
   let inSyncTimeout = undefined;
 
+  let errorCount = 0;
+
   const createSyncHandler = async () => {
     const authCreds = Storage.get("authCreds");
     const dbName = authCreds ? authCreds.profileId : "anonymous";
@@ -67,6 +69,21 @@ export default (HOST, SSL) => {
           location.reload(); //FIXME
         } else {
           console.log(err);
+          if (outSyncHandler) {
+            outSyncHandler.cancel();
+            outSyncHandler = undefined;
+          }
+          if (inSyncTimeout) {
+            clearTimeout(inSyncTimeout);
+            inSyncTimeout = undefined;
+          }
+          cachedDBName = undefined;
+          errorCount += 1;
+          console.log(errorCount);
+          if (errorCount > 20) {
+            RKunafa.logout();
+            location.reload(); //FIXME
+          }
         }
       };
       const startTime = Date.now();
