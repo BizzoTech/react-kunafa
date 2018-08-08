@@ -36,7 +36,7 @@ export default (HOST, SSL) => {
     const localDB = new PouchDB(dbName, { auto_compaction: true });
 
     const dbUrl = authCreds
-      ? `${PROTCOL}://${HOST}/db`
+      ? `${PROTCOL}://${authCreds.username}:${authCreds.password}@${HOST}/db`
       : `${PROTCOL}://${HOST}/anonymous`;
 
     const remoteDB = new PouchDB(dbUrl, {

@@ -668,7 +668,7 @@ exports.default = function (HOST, SSL) {
 
             case 7:
               localDB = new _pouchdb2.default(dbName, { auto_compaction: true });
-              dbUrl = authCreds ? PROTCOL + "://" + HOST + "/db" : PROTCOL + "://" + HOST + "/anonymous";
+              dbUrl = authCreds ? PROTCOL + "://" + authCreds.username + ":" + authCreds.password + "@" + HOST + "/db" : PROTCOL + "://" + HOST + "/anonymous";
               remoteDB = new _pouchdb2.default(dbUrl, {
                 fetch: function fetch(url, opts) {
                   opts.headers.set("X-PouchDB", "true");
