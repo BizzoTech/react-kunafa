@@ -614,18 +614,18 @@ exports.default = function (HOST, SSL) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              console.log("Create Sync Handler");
+              //console.log("Create Sync Handler");
               authCreds = _store2.default.get("authCreds");
               dbName = authCreds ? authCreds.profileId : "anonymous";
 
               if (!(dbName === cachedDBName)) {
-                _context3.next = 5;
+                _context3.next = 4;
                 break;
               }
 
               return _context3.abrupt("return");
 
-            case 5:
+            case 4:
               authenticate = function () {
                 var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
                   return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -657,11 +657,9 @@ exports.default = function (HOST, SSL) {
                         case 8:
                           _context.prev = 8;
                           _context.t0 = _context["catch"](2);
-
-                          console.log(_context.t0);
                           return _context.abrupt("return");
 
-                        case 12:
+                        case 11:
                         case "end":
                           return _context.stop();
                       }
@@ -674,10 +672,10 @@ exports.default = function (HOST, SSL) {
                 };
               }();
 
-              _context3.next = 8;
+              _context3.next = 7;
               return authenticate();
 
-            case 8:
+            case 7:
               localDB = new _pouchdb2.default(dbName, { auto_compaction: true });
               dbUrl = authCreds ? PROTCOL + "://" + authCreds.username + ":" + authCreds.password + "@" + HOST + "/db" : PROTCOL + "://" + HOST + "/anonymous";
               remoteDB = new _pouchdb2.default(dbUrl, {
@@ -718,22 +716,14 @@ exports.default = function (HOST, SSL) {
                           case 2:
                             sessionRes = _context2.sent;
 
-                            if (sessionRes) {
-                              _context2.next = 5;
-                              break;
-                            }
 
-                            return _context2.abrupt("return");
-
-                          case 5:
-
-                            if (sessionRes.status === 401) {
+                            if (sessionRes && sessionRes.status === 401) {
                               //Unauthorized user
                               _RKunafa2.default.logout();
                               location.reload(); //FIXME
                             } else {
                               cachedDBName = undefined;
-                              console.log(err);
+                              //console.log(err);
                               if (outSyncHandler) {
                                 outSyncHandler.cancel();
                                 outSyncHandler = undefined;
@@ -747,14 +737,10 @@ exports.default = function (HOST, SSL) {
                                 inSyncTimeout = undefined;
                               }
                               errorCount += 1;
-                              console.log(errorCount);
-                              // if (errorCount > 20) {
-                              //   RKunafa.logout();
-                              //   location.reload(); //FIXME
-                              // }
+                              //console.log(errorCount);
                             }
 
-                          case 6:
+                          case 4:
                           case "end":
                             return _context2.stop();
                         }
@@ -800,7 +786,7 @@ exports.default = function (HOST, SSL) {
                 });
               }
 
-            case 15:
+            case 14:
             case "end":
               return _context3.stop();
           }
