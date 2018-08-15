@@ -24,14 +24,18 @@ export default (HOST, SSL) => {
 
     const authenticate = async () => {
       if (!authCreds) return;
-      return await fetch(`${PROTCOL}://${HOST}/_session`, {
-        method: "post",
-        headers: {
-          "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
-        },
-        credentials: "same-origin",
-        body: `name=${authCreds.username}&password=${authCreds.password}`
-      });
+      try {
+        return await fetch(`${PROTCOL}://${HOST}/_session`, {
+          method: "post",
+          headers: {
+            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          credentials: "same-origin",
+          body: `name=${authCreds.username}&password=${authCreds.password}`
+        });
+      } catch (error) {
+        return;
+      }
     };
 
     await authenticate();
@@ -69,7 +73,7 @@ export default (HOST, SSL) => {
       const onSyncError = async err => {
         const sessionRes = await authenticate();
 
-        if (sessionRes.status === 401) {
+        if (sessionRes && sessionRes.status === 401) {
           //Unauthorized user
           RKunafa.logout();
           location.reload(); //FIXME
@@ -90,10 +94,10 @@ export default (HOST, SSL) => {
           cachedDBName = undefined;
           errorCount += 1;
           console.log(errorCount);
-          if (errorCount > 20) {
-            RKunafa.logout();
-            location.reload(); //FIXME
-          }
+          // if (errorCount > 20) {
+          //   RKunafa.logout();
+          //   location.reload(); //FIXME
+          // }
         }
       };
       const startTime = Date.now();
@@ -125,7 +129,7 @@ export default (HOST, SSL) => {
             .to(remoteDB, {
               live: true,
               retry: true,
-              back_off_function: function (delay) {
+              back_off_function: function(delay) {
                 if (delay === 0) {
                   return 1000;
                 }

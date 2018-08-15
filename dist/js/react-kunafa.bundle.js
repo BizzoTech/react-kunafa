@@ -640,7 +640,8 @@ exports.default = function (HOST, SSL) {
                           return _context.abrupt("return");
 
                         case 2:
-                          _context.next = 4;
+                          _context.prev = 2;
+                          _context.next = 5;
                           return fetch(PROTCOL + "://" + HOST + "/_session", {
                             method: "post",
                             headers: {
@@ -650,15 +651,20 @@ exports.default = function (HOST, SSL) {
                             body: "name=" + authCreds.username + "&password=" + authCreds.password
                           });
 
-                        case 4:
+                        case 5:
                           return _context.abrupt("return", _context.sent);
 
-                        case 5:
+                        case 8:
+                          _context.prev = 8;
+                          _context.t0 = _context["catch"](2);
+                          return _context.abrupt("return");
+
+                        case 11:
                         case "end":
                           return _context.stop();
                       }
                     }
-                  }, _callee, undefined);
+                  }, _callee, undefined, [[2, 8]]);
                 }));
 
                 return function authenticate() {
@@ -711,7 +717,7 @@ exports.default = function (HOST, SSL) {
                             sessionRes = _context2.sent;
 
 
-                            if (sessionRes.status === 401) {
+                            if (sessionRes && sessionRes.status === 401) {
                               //Unauthorized user
                               _RKunafa2.default.logout();
                               location.reload(); //FIXME
@@ -732,10 +738,10 @@ exports.default = function (HOST, SSL) {
                               cachedDBName = undefined;
                               errorCount += 1;
                               console.log(errorCount);
-                              if (errorCount > 20) {
-                                _RKunafa2.default.logout();
-                                location.reload(); //FIXME
-                              }
+                              // if (errorCount > 20) {
+                              //   RKunafa.logout();
+                              //   location.reload(); //FIXME
+                              // }
                             }
 
                           case 4:
@@ -754,7 +760,7 @@ exports.default = function (HOST, SSL) {
                 startTime = Date.now();
 
                 console.log("Initial Replication started at", new Date(startTime));
-                localDB.replicate.from(remoteDB).on('denied', onSyncError).on("error", onSyncError).on("complete", function () {
+                localDB.replicate.from(remoteDB).on("denied", onSyncError).on("error", onSyncError).on("complete", function () {
                   var endTime = Date.now();
                   console.log("Initial Replication ended at", new Date(endTime));
                   console.log("Initial load took ", (endTime - startTime) / 1000);
@@ -763,7 +769,7 @@ exports.default = function (HOST, SSL) {
                     if (inSyncHandler) {
                       inSyncHandler.cancel();
                     }
-                    inSyncHandler = localDB.replicate.from(remoteDB).on('denied', onSyncError).on("error", onSyncError).on("complete", function () {
+                    inSyncHandler = localDB.replicate.from(remoteDB).on("denied", onSyncError).on("error", onSyncError).on("complete", function () {
                       inSyncTimeout = setTimeout(replicateFromRemote, 5000);
                     });
                   };
@@ -771,8 +777,14 @@ exports.default = function (HOST, SSL) {
 
                   outSyncHandler = localDB.replicate.to(remoteDB, {
                     live: true,
-                    retry: true
-                  }).on('denied', onSyncError).on("error", onSyncError);
+                    retry: true,
+                    back_off_function: function back_off_function(delay) {
+                      if (delay === 0) {
+                        return 1000;
+                      }
+                      return delay < 5000 ? delay + 1000 : 5000;
+                    }
+                  }).on("denied", onSyncError).on("error", onSyncError);
                 });
               }
 
