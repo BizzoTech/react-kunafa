@@ -8,11 +8,13 @@ export default (HOST, SSL) => {
 
   let cachedDBName = undefined;
   let outSyncHandler = undefined;
+  let inSyncHandler = undefined;
   let inSyncTimeout = undefined;
 
   let errorCount = 0;
 
   const createSyncHandler = async () => {
+    console.log("Create Sync Handler");
     const authCreds = Storage.get("authCreds");
     const dbName = authCreds ? authCreds.profileId : "anonymous";
     if (dbName === cachedDBName) {
@@ -50,6 +52,9 @@ export default (HOST, SSL) => {
     if (outSyncHandler) {
       outSyncHandler.cancel();
     }
+    if (inSyncHandler) {
+      inSyncHandler.cancel();
+    }
     if (inSyncTimeout) {
       clearTimeout(inSyncTimeout);
     }
@@ -72,6 +77,10 @@ export default (HOST, SSL) => {
           if (outSyncHandler) {
             outSyncHandler.cancel();
             outSyncHandler = undefined;
+          }
+          if (inSyncHandler) {
+            inSyncHandler.cancel();
+            inSyncHandler = undefined;
           }
           if (inSyncTimeout) {
             clearTimeout(inSyncTimeout);
@@ -97,7 +106,10 @@ export default (HOST, SSL) => {
           console.log("Initial load took ", (endTime - startTime) / 1000);
 
           const replicateFromRemote = () => {
-            localDB.replicate
+            if (inSyncHandler) {
+              inSyncHandler.cancel();
+            }
+            inSyncHandler = localDB.replicate
               .from(remoteDB)
               .on("error", onSyncError)
               .on("complete", () => {
@@ -147,7 +159,7 @@ export default (HOST, SSL) => {
         clearInterval(mainSyncInterval);
       }
       await createSyncHandler();
-      mainSyncInterval = setInterval(createSyncHandler, 10000);
+      mainSyncInterval = setInterval(createSyncHandler, 1000);
 
       if (sharedSyncInterval) {
         clearInterval(sharedSyncInterval);
@@ -166,12 +178,16 @@ export default (HOST, SSL) => {
       if (outSyncHandler) {
         outSyncHandler.cancel();
       }
+      if (inSyncHandler) {
+        inSyncHandler.cancel();
+      }
       if (inSyncTimeout) {
         clearTimeout(inSyncTimeout);
       }
       mainSyncInterval = undefined;
       sharedSyncInterval = undefined;
       outSyncHandler = undefined;
+      inSyncHandler = undefined;
       inSyncTimeout = undefined;
       cachedDBName = undefined;
     }

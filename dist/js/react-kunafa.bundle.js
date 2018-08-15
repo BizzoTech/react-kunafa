@@ -601,6 +601,7 @@ exports.default = function (HOST, SSL) {
 
   var cachedDBName = undefined;
   var outSyncHandler = undefined;
+  var inSyncHandler = undefined;
   var inSyncTimeout = undefined;
 
   var errorCount = 0;
@@ -612,17 +613,18 @@ exports.default = function (HOST, SSL) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
+              console.log("Create Sync Handler");
               authCreds = _store2.default.get("authCreds");
               dbName = authCreds ? authCreds.profileId : "anonymous";
 
               if (!(dbName === cachedDBName)) {
-                _context3.next = 4;
+                _context3.next = 5;
                 break;
               }
 
               return _context3.abrupt("return");
 
-            case 4:
+            case 5:
               authenticate = function () {
                 var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
                   return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -663,10 +665,10 @@ exports.default = function (HOST, SSL) {
                 };
               }();
 
-              _context3.next = 7;
+              _context3.next = 8;
               return authenticate();
 
-            case 7:
+            case 8:
               localDB = new _pouchdb2.default(dbName, { auto_compaction: true });
               dbUrl = authCreds ? PROTCOL + "://" + authCreds.username + ":" + authCreds.password + "@" + HOST + "/db" : PROTCOL + "://" + HOST + "/anonymous";
               remoteDB = new _pouchdb2.default(dbUrl, {
@@ -680,6 +682,9 @@ exports.default = function (HOST, SSL) {
 
               if (outSyncHandler) {
                 outSyncHandler.cancel();
+              }
+              if (inSyncHandler) {
+                inSyncHandler.cancel();
               }
               if (inSyncTimeout) {
                 clearTimeout(inSyncTimeout);
@@ -714,6 +719,10 @@ exports.default = function (HOST, SSL) {
                               if (outSyncHandler) {
                                 outSyncHandler.cancel();
                                 outSyncHandler = undefined;
+                              }
+                              if (inSyncHandler) {
+                                inSyncHandler.cancel();
+                                inSyncHandler = undefined;
                               }
                               if (inSyncTimeout) {
                                 clearTimeout(inSyncTimeout);
@@ -750,7 +759,10 @@ exports.default = function (HOST, SSL) {
                   console.log("Initial load took ", (endTime - startTime) / 1000);
 
                   var replicateFromRemote = function replicateFromRemote() {
-                    localDB.replicate.from(remoteDB).on("error", onSyncError).on("complete", function () {
+                    if (inSyncHandler) {
+                      inSyncHandler.cancel();
+                    }
+                    inSyncHandler = localDB.replicate.from(remoteDB).on("error", onSyncError).on("complete", function () {
                       inSyncTimeout = setTimeout(replicateFromRemote, 5000);
                     });
                   };
@@ -765,7 +777,7 @@ exports.default = function (HOST, SSL) {
 
               cachedDBName = dbName;
 
-            case 14:
+            case 16:
             case "end":
               return _context3.stop();
           }
@@ -834,7 +846,7 @@ exports.default = function (HOST, SSL) {
                 return createSyncHandler();
 
               case 3:
-                mainSyncInterval = setInterval(createSyncHandler, 10000);
+                mainSyncInterval = setInterval(createSyncHandler, 1000);
 
                 if (sharedSyncInterval) {
                   clearInterval(sharedSyncInterval);
@@ -869,12 +881,16 @@ exports.default = function (HOST, SSL) {
       if (outSyncHandler) {
         outSyncHandler.cancel();
       }
+      if (inSyncHandler) {
+        inSyncHandler.cancel();
+      }
       if (inSyncTimeout) {
         clearTimeout(inSyncTimeout);
       }
       mainSyncInterval = undefined;
       sharedSyncInterval = undefined;
       outSyncHandler = undefined;
+      inSyncHandler = undefined;
       inSyncTimeout = undefined;
       cachedDBName = undefined;
     }
