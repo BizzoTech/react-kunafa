@@ -100,6 +100,7 @@ export default (HOST, SSL) => {
       console.log("Initial Replication started at", new Date(startTime));
       localDB.replicate
         .from(remoteDB)
+        .on("denied", onSyncError)
         .on("error", onSyncError)
         .on("complete", () => {
           const endTime = Date.now();
@@ -112,6 +113,7 @@ export default (HOST, SSL) => {
             }
             inSyncHandler = localDB.replicate
               .from(remoteDB)
+              .on("denied", onSyncError)
               .on("error", onSyncError)
               .on("complete", () => {
                 inSyncTimeout = setTimeout(replicateFromRemote, 5000);
@@ -122,8 +124,15 @@ export default (HOST, SSL) => {
           outSyncHandler = localDB.replicate
             .to(remoteDB, {
               live: true,
-              retry: false
+              retry: true,
+              back_off_function: function (delay) {
+                if (delay === 0) {
+                  return 1000;
+                }
+                return delay < 5000 ? delay + 1000 : 5000;
+              }
             })
+            .on("denied", onSyncError)
             .on("error", onSyncError);
         });
     }

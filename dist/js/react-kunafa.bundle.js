@@ -754,7 +754,7 @@ exports.default = function (HOST, SSL) {
                 startTime = Date.now();
 
                 console.log("Initial Replication started at", new Date(startTime));
-                localDB.replicate.from(remoteDB).on("error", onSyncError).on("complete", function () {
+                localDB.replicate.from(remoteDB).on('denied', onSyncError).on("error", onSyncError).on("complete", function () {
                   var endTime = Date.now();
                   console.log("Initial Replication ended at", new Date(endTime));
                   console.log("Initial load took ", (endTime - startTime) / 1000);
@@ -763,7 +763,7 @@ exports.default = function (HOST, SSL) {
                     if (inSyncHandler) {
                       inSyncHandler.cancel();
                     }
-                    inSyncHandler = localDB.replicate.from(remoteDB).on("error", onSyncError).on("complete", function () {
+                    inSyncHandler = localDB.replicate.from(remoteDB).on('denied', onSyncError).on("error", onSyncError).on("complete", function () {
                       inSyncTimeout = setTimeout(replicateFromRemote, 5000);
                     });
                   };
@@ -771,8 +771,8 @@ exports.default = function (HOST, SSL) {
 
                   outSyncHandler = localDB.replicate.to(remoteDB, {
                     live: true,
-                    retry: false
-                  }).on("error", onSyncError);
+                    retry: true
+                  }).on('denied', onSyncError).on("error", onSyncError);
                 });
               }
 
