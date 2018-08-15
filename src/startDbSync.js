@@ -78,6 +78,7 @@ export default (HOST, SSL) => {
           RKunafa.logout();
           location.reload(); //FIXME
         } else {
+          cachedDBName = undefined;
           console.log(err);
           if (outSyncHandler) {
             outSyncHandler.cancel();
@@ -91,7 +92,6 @@ export default (HOST, SSL) => {
             clearTimeout(inSyncTimeout);
             inSyncTimeout = undefined;
           }
-          cachedDBName = undefined;
           errorCount += 1;
           console.log(errorCount);
           // if (errorCount > 20) {
@@ -138,10 +138,10 @@ export default (HOST, SSL) => {
             })
             .on("denied", onSyncError)
             .on("error", onSyncError);
+
+          cachedDBName = dbName;
         });
     }
-
-    cachedDBName = dbName;
   };
 
   //setInterval(createSyncHandler, 1000);
@@ -160,7 +160,10 @@ export default (HOST, SSL) => {
     if (sharedSyncHandler) {
       sharedSyncHandler.cancel();
     }
-    sharedSyncHandler = localSharedDB.replicate.from(remoteSharedDB);
+    sharedSyncHandler = localSharedDB.replicate
+      .from(remoteSharedDB)
+      .on("error", () => sharedSyncHandler.cancel())
+      .on("paused", () => sharedSyncHandler.cancel());
   };
 
   // syncShared();
@@ -176,13 +179,13 @@ export default (HOST, SSL) => {
         clearInterval(mainSyncInterval);
       }
       await createSyncHandler();
-      mainSyncInterval = setInterval(createSyncHandler, 1000);
+      mainSyncInterval = setInterval(createSyncHandler, 10000);
 
       if (sharedSyncInterval) {
         clearInterval(sharedSyncInterval);
       }
       await syncShared();
-      const syncSharedIntervalPeriod = 1 * 1000 * 60;
+      const syncSharedIntervalPeriod = 1 * 1000; // * 60;
       sharedSyncInterval = setInterval(syncShared, syncSharedIntervalPeriod);
     },
     stop: () => {

@@ -722,6 +722,7 @@ exports.default = function (HOST, SSL) {
                               _RKunafa2.default.logout();
                               location.reload(); //FIXME
                             } else {
+                              cachedDBName = undefined;
                               console.log(err);
                               if (outSyncHandler) {
                                 outSyncHandler.cancel();
@@ -735,7 +736,6 @@ exports.default = function (HOST, SSL) {
                                 clearTimeout(inSyncTimeout);
                                 inSyncTimeout = undefined;
                               }
-                              cachedDBName = undefined;
                               errorCount += 1;
                               console.log(errorCount);
                               // if (errorCount > 20) {
@@ -785,12 +785,12 @@ exports.default = function (HOST, SSL) {
                       return delay < 5000 ? delay + 1000 : 5000;
                     }
                   }).on("denied", onSyncError).on("error", onSyncError);
+
+                  cachedDBName = dbName;
                 });
               }
 
-              cachedDBName = dbName;
-
-            case 16:
+            case 15:
             case "end":
               return _context3.stop();
           }
@@ -824,7 +824,11 @@ exports.default = function (HOST, SSL) {
               if (sharedSyncHandler) {
                 sharedSyncHandler.cancel();
               }
-              sharedSyncHandler = localSharedDB.replicate.from(remoteSharedDB);
+              sharedSyncHandler = localSharedDB.replicate.from(remoteSharedDB).on("error", function () {
+                return sharedSyncHandler.cancel();
+              }).on("paused", function () {
+                return sharedSyncHandler.cancel();
+              });
 
             case 2:
             case "end":
@@ -861,7 +865,7 @@ exports.default = function (HOST, SSL) {
                 return createSyncHandler();
 
               case 3:
-                mainSyncInterval = setInterval(createSyncHandler, 1000);
+                mainSyncInterval = setInterval(createSyncHandler, 10000);
 
                 if (sharedSyncInterval) {
                   clearInterval(sharedSyncInterval);
@@ -870,7 +874,7 @@ exports.default = function (HOST, SSL) {
                 return syncShared();
 
               case 7:
-                syncSharedIntervalPeriod = 1 * 1000 * 60;
+                syncSharedIntervalPeriod = 1 * 1000; // * 60;
 
                 sharedSyncInterval = setInterval(syncShared, syncSharedIntervalPeriod);
 
