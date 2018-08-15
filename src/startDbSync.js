@@ -34,6 +34,7 @@ export default (HOST, SSL) => {
           body: `name=${authCreds.username}&password=${authCreds.password}`
         });
       } catch (error) {
+        console.error(error);
         return;
       }
     };

@@ -657,9 +657,11 @@ exports.default = function (HOST, SSL) {
                         case 8:
                           _context.prev = 8;
                           _context.t0 = _context["catch"](2);
+
+                          console.error(_context.t0);
                           return _context.abrupt("return");
 
-                        case 11:
+                        case 12:
                         case "end":
                           return _context.stop();
                       }
