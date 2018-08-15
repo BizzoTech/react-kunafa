@@ -10,6 +10,7 @@ export default (HOST, SSL) => {
   let outSyncHandler = undefined;
   let inSyncHandler = undefined;
   let inSyncTimeout = undefined;
+  let sharedSyncHandler = undefined;
 
   let errorCount = 0;
 
@@ -143,7 +144,10 @@ export default (HOST, SSL) => {
   });
 
   const syncShared = async () => {
-    await localSharedDB.replicate.from(remoteSharedDB);
+    if (sharedSyncHandler) {
+      sharedSyncHandler.cancel();
+    }
+    sharedSyncHandler = localSharedDB.replicate.from(remoteSharedDB);
   };
 
   // syncShared();
@@ -184,11 +188,15 @@ export default (HOST, SSL) => {
       if (inSyncTimeout) {
         clearTimeout(inSyncTimeout);
       }
+      if (sharedSyncHandler) {
+        sharedSyncHandler.cancel();
+      }
       mainSyncInterval = undefined;
       sharedSyncInterval = undefined;
       outSyncHandler = undefined;
       inSyncHandler = undefined;
       inSyncTimeout = undefined;
+      sharedSyncHandler = undefined;
       cachedDBName = undefined;
     }
   };

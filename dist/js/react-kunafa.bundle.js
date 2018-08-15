@@ -603,6 +603,7 @@ exports.default = function (HOST, SSL) {
   var outSyncHandler = undefined;
   var inSyncHandler = undefined;
   var inSyncTimeout = undefined;
+  var sharedSyncHandler = undefined;
 
   var errorCount = 0;
 
@@ -808,8 +809,10 @@ exports.default = function (HOST, SSL) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              _context4.next = 2;
-              return localSharedDB.replicate.from(remoteSharedDB);
+              if (sharedSyncHandler) {
+                sharedSyncHandler.cancel();
+              }
+              sharedSyncHandler = localSharedDB.replicate.from(remoteSharedDB);
 
             case 2:
             case "end":
@@ -887,11 +890,15 @@ exports.default = function (HOST, SSL) {
       if (inSyncTimeout) {
         clearTimeout(inSyncTimeout);
       }
+      if (sharedSyncHandler) {
+        sharedSyncHandler.cancel();
+      }
       mainSyncInterval = undefined;
       sharedSyncInterval = undefined;
       outSyncHandler = undefined;
       inSyncHandler = undefined;
       inSyncTimeout = undefined;
+      sharedSyncHandler = undefined;
       cachedDBName = undefined;
     }
   };
