@@ -871,7 +871,7 @@ exports.default = function (HOST, SSL) {
                 return createSyncHandler();
 
               case 3:
-                mainSyncInterval = setInterval(createSyncHandler, 1000);
+                mainSyncInterval = setInterval(createSyncHandler, 10000);
 
                 if (sharedSyncInterval) {
                   clearInterval(sharedSyncInterval);

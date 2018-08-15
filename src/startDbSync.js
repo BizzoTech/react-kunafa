@@ -179,7 +179,7 @@ export default (HOST, SSL) => {
         clearInterval(mainSyncInterval);
       }
       await createSyncHandler();
-      mainSyncInterval = setInterval(createSyncHandler, 1000);
+      mainSyncInterval = setInterval(createSyncHandler, 10000);
 
       if (sharedSyncInterval) {
         clearInterval(sharedSyncInterval);
