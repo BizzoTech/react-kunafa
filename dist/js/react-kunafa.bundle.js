@@ -760,7 +760,7 @@ exports.default = function (HOST, SSL) {
                 startTime = Date.now();
 
                 console.log("Initial Replication started at", new Date(startTime));
-                localDB.replicate.from(remoteDB).on("denied", onSyncError).on("error", onSyncError).on("complete", function () {
+                inSyncHandler = localDB.replicate.from(remoteDB).on("denied", onSyncError).on("error", onSyncError).on("complete", function () {
                   var endTime = Date.now();
                   console.log("Initial Replication ended at", new Date(endTime));
                   console.log("Initial load took ", (endTime - startTime) / 1000);
@@ -853,7 +853,6 @@ exports.default = function (HOST, SSL) {
   return {
     start: function () {
       var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-        var syncSharedIntervalPeriod;
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
@@ -865,20 +864,16 @@ exports.default = function (HOST, SSL) {
                 return createSyncHandler();
 
               case 3:
-                mainSyncInterval = setInterval(createSyncHandler, 10000);
+                mainSyncInterval = setInterval(createSyncHandler, 1000);
 
                 if (sharedSyncInterval) {
                   clearInterval(sharedSyncInterval);
                 }
-                _context5.next = 7;
-                return syncShared();
+                // await syncShared();
+                // const syncSharedIntervalPeriod = 1 * 1000 * 60;
+                // sharedSyncInterval = setInterval(syncShared, syncSharedIntervalPeriod);
 
-              case 7:
-                syncSharedIntervalPeriod = 1 * 1000; // * 60;
-
-                sharedSyncInterval = setInterval(syncShared, syncSharedIntervalPeriod);
-
-              case 9:
+              case 5:
               case "end":
                 return _context5.stop();
             }

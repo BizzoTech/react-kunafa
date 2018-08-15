@@ -102,7 +102,7 @@ export default (HOST, SSL) => {
       };
       const startTime = Date.now();
       console.log("Initial Replication started at", new Date(startTime));
-      localDB.replicate
+      inSyncHandler = localDB.replicate
         .from(remoteDB)
         .on("denied", onSyncError)
         .on("error", onSyncError)
@@ -179,14 +179,14 @@ export default (HOST, SSL) => {
         clearInterval(mainSyncInterval);
       }
       await createSyncHandler();
-      mainSyncInterval = setInterval(createSyncHandler, 10000);
+      mainSyncInterval = setInterval(createSyncHandler, 1000);
 
       if (sharedSyncInterval) {
         clearInterval(sharedSyncInterval);
       }
-      await syncShared();
-      const syncSharedIntervalPeriod = 1 * 1000; // * 60;
-      sharedSyncInterval = setInterval(syncShared, syncSharedIntervalPeriod);
+      // await syncShared();
+      // const syncSharedIntervalPeriod = 1 * 1000 * 60;
+      // sharedSyncInterval = setInterval(syncShared, syncSharedIntervalPeriod);
     },
     stop: () => {
       if (mainSyncInterval) {
