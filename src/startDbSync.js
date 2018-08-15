@@ -74,7 +74,12 @@ export default (HOST, SSL) => {
       const onSyncError = async err => {
         const sessionRes = await authenticate();
 
-        if (sessionRes && sessionRes.status === 401) {
+        if (!sessionRes) {
+          // User is offline
+          return;
+        }
+
+        if (sessionRes.status === 401) {
           //Unauthorized user
           RKunafa.logout();
           location.reload(); //FIXME

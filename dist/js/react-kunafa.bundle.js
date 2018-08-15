@@ -718,8 +718,16 @@ exports.default = function (HOST, SSL) {
                           case 2:
                             sessionRes = _context2.sent;
 
+                            if (sessionRes) {
+                              _context2.next = 5;
+                              break;
+                            }
 
-                            if (sessionRes && sessionRes.status === 401) {
+                            return _context2.abrupt("return");
+
+                          case 5:
+
+                            if (sessionRes.status === 401) {
                               //Unauthorized user
                               _RKunafa2.default.logout();
                               location.reload(); //FIXME
@@ -746,7 +754,7 @@ exports.default = function (HOST, SSL) {
                               // }
                             }
 
-                          case 4:
+                          case 6:
                           case "end":
                             return _context2.stop();
                         }
