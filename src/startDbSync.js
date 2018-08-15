@@ -15,7 +15,7 @@ export default (HOST, SSL) => {
   let errorCount = 0;
 
   const createSyncHandler = async () => {
-    console.log("Create Sync Handler");
+    //console.log("Create Sync Handler");
     const authCreds = Storage.get("authCreds");
     const dbName = authCreds ? authCreds.profileId : "anonymous";
     if (dbName === cachedDBName) {
@@ -34,7 +34,6 @@ export default (HOST, SSL) => {
           body: `name=${authCreds.username}&password=${authCreds.password}`
         });
       } catch (error) {
-        console.log(error);
         return;
       }
     };
@@ -74,18 +73,13 @@ export default (HOST, SSL) => {
       const onSyncError = async err => {
         const sessionRes = await authenticate();
 
-        if (!sessionRes) {
-          // User is offline
-          return;
-        }
-
-        if (sessionRes.status === 401) {
+        if (sessionRes && sessionRes.status === 401) {
           //Unauthorized user
           RKunafa.logout();
           location.reload(); //FIXME
         } else {
           cachedDBName = undefined;
-          console.log(err);
+          //console.log(err);
           if (outSyncHandler) {
             outSyncHandler.cancel();
             outSyncHandler = undefined;
@@ -99,11 +93,7 @@ export default (HOST, SSL) => {
             inSyncTimeout = undefined;
           }
           errorCount += 1;
-          console.log(errorCount);
-          // if (errorCount > 20) {
-          //   RKunafa.logout();
-          //   location.reload(); //FIXME
-          // }
+          //console.log(errorCount);
         }
       };
       const startTime = Date.now();
