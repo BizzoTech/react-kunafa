@@ -658,7 +658,7 @@ exports.default = function (HOST, SSL) {
                           _context.prev = 8;
                           _context.t0 = _context["catch"](2);
 
-                          console.error(_context.t0);
+                          console.log(_context.t0);
                           return _context.abrupt("return");
 
                         case 12:
