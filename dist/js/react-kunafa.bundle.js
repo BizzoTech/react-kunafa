@@ -609,7 +609,7 @@ exports.default = function (HOST, SSL) {
 
   var createSyncHandler = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-      var authCreds, dbName, authenticate, localDB, dbUrl, remoteDB, onSyncError, startTime;
+      var authCreds, dbName, authenticate, sessionRes, localDB, dbUrl, remoteDB, onSyncError, startTime;
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
@@ -676,6 +676,16 @@ exports.default = function (HOST, SSL) {
               return authenticate();
 
             case 7:
+              sessionRes = _context3.sent;
+
+              if (sessionRes) {
+                _context3.next = 10;
+                break;
+              }
+
+              return _context3.abrupt("return");
+
+            case 10:
               localDB = new _pouchdb2.default(dbName, { auto_compaction: true });
               dbUrl = authCreds ? PROTCOL + "://" + authCreds.username + ":" + authCreds.password + "@" + HOST + "/db" : PROTCOL + "://" + HOST + "/anonymous";
               remoteDB = new _pouchdb2.default(dbUrl, {
@@ -702,6 +712,7 @@ exports.default = function (HOST, SSL) {
                   live: true,
                   retry: true
                 });
+                cachedDBName = dbName;
               } else {
                 onSyncError = function () {
                   var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(err) {
@@ -786,7 +797,7 @@ exports.default = function (HOST, SSL) {
                 });
               }
 
-            case 14:
+            case 17:
             case "end":
               return _context3.stop();
           }

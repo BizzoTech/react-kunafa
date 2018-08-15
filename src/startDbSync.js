@@ -38,7 +38,10 @@ export default (HOST, SSL) => {
       }
     };
 
-    await authenticate();
+    const sessionRes = await authenticate();
+    if (!sessionRes) {
+      return; //User is offline
+    }
 
     const localDB = new PouchDB(dbName, { auto_compaction: true });
 
@@ -69,6 +72,7 @@ export default (HOST, SSL) => {
         live: true,
         retry: true
       });
+      cachedDBName = dbName;
     } else {
       const onSyncError = async err => {
         const sessionRes = await authenticate();
