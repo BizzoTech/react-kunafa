@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"), require("store2"), require("kunafa-client"), require("react-redux"), require("i18n-js"), require("ramda"), require("react-dom"), require("uuid"), require("pouchdb"), require("platform"), require("reselect"), require("react-dom/server"));
+		module.exports = factory(require("store2"), require("react"), require("kunafa-client"), require("pouchdb"), require("platform"), require("i18n-js"), require("react-redux"), require("react-dom"), require("ramda"), require("uuid"), require("reselect"), require("react-dom/server"));
 	else if(typeof define === 'function' && define.amd)
-		define("reactKunafa", ["react", "store2", "kunafa-client", "react-redux", "i18n-js", "ramda", "react-dom", "uuid", "pouchdb", "platform", "reselect", "react-dom/server"], factory);
+		define("reactKunafa", ["store2", "react", "kunafa-client", "pouchdb", "platform", "i18n-js", "react-redux", "react-dom", "ramda", "uuid", "reselect", "react-dom/server"], factory);
 	else if(typeof exports === 'object')
-		exports["reactKunafa"] = factory(require("react"), require("store2"), require("kunafa-client"), require("react-redux"), require("i18n-js"), require("ramda"), require("react-dom"), require("uuid"), require("pouchdb"), require("platform"), require("reselect"), require("react-dom/server"));
+		exports["reactKunafa"] = factory(require("store2"), require("react"), require("kunafa-client"), require("pouchdb"), require("platform"), require("i18n-js"), require("react-redux"), require("react-dom"), require("ramda"), require("uuid"), require("reselect"), require("react-dom/server"));
 	else
-		root["reactKunafa"] = factory(root["react"], root["store2"], root["kunafa-client"], root["react-redux"], root["i18n-js"], root["ramda"], root["react-dom"], root["uuid"], root["pouchdb"], root["platform"], root["reselect"], root["react-dom/server"]);
-})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__, __WEBPACK_EXTERNAL_MODULE_14__, __WEBPACK_EXTERNAL_MODULE_15__, __WEBPACK_EXTERNAL_MODULE_17__, __WEBPACK_EXTERNAL_MODULE_19__, __WEBPACK_EXTERNAL_MODULE_20__, __WEBPACK_EXTERNAL_MODULE_24__) {
+		root["reactKunafa"] = factory(root["store2"], root["react"], root["kunafa-client"], root["pouchdb"], root["platform"], root["i18n-js"], root["react-redux"], root["react-dom"], root["ramda"], root["uuid"], root["reselect"], root["react-dom/server"]);
+})(window, function(__WEBPACK_EXTERNAL_MODULE__0__, __WEBPACK_EXTERNAL_MODULE__1__, __WEBPACK_EXTERNAL_MODULE__2__, __WEBPACK_EXTERNAL_MODULE__3__, __WEBPACK_EXTERNAL_MODULE__4__, __WEBPACK_EXTERNAL_MODULE__5__, __WEBPACK_EXTERNAL_MODULE__6__, __WEBPACK_EXTERNAL_MODULE__7__, __WEBPACK_EXTERNAL_MODULE__8__, __WEBPACK_EXTERNAL_MODULE__9__, __WEBPACK_EXTERNAL_MODULE__10__, __WEBPACK_EXTERNAL_MODULE__11__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -46,12 +46,32 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
 /******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
 /******/ 	};
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
@@ -69,6 +89,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "/";
 /******/
+/******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
@@ -77,471 +98,665 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 0 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_0__;
+module.exports = __WEBPACK_EXTERNAL_MODULE__0__;
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _cacheStore = __webpack_require__(6);
-
-var _cacheStore2 = _interopRequireDefault(_cacheStore);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var login = function login(username, password, profileId) {
-  return _cacheStore2.default.save("authCreds", {
-    username: username,
-    password: password,
-    profileId: profileId
-  });
-};
-
-var logout = function logout(username, password, profileId) {
-  return _cacheStore2.default.delete("authCreds");
-};
-
-var getProfileId = function getProfileId() {
-  var authCreds = _cacheStore2.default.get("authCreds");
-  return authCreds ? authCreds.profileId : undefined;
-};
-
-exports.default = {
-  login: login,
-  logout: logout,
-  getProfileId: getProfileId
-};
+module.exports = __WEBPACK_EXTERNAL_MODULE__1__;
 
 /***/ }),
 /* 2 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
+module.exports = __WEBPACK_EXTERNAL_MODULE__2__;
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
+module.exports = __WEBPACK_EXTERNAL_MODULE__3__;
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _kunafaClient = __webpack_require__(3);
-
-var _i18nJs = __webpack_require__(8);
-
-var _i18nJs2 = _interopRequireDefault(_i18nJs);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var connect = function connect(mapStateToProps, mapDispatchToProps) {
-  return function (component) {
-    return (0, _kunafaClient.connect)(function (state, ownProps) {
-      var translations = ownProps.selectors.translationsSelector ? ownProps.selectors.translationsSelector(state) : _i18nJs2.default.translations;
-      if (mapStateToProps) {
-        return Object.assign({}, mapStateToProps(state, ownProps), {
-          translations: translations
-        });
-      } else {
-        return {
-          translations: translations
-        };
-      }
-    }, mapDispatchToProps)(component);
-  };
-};
-
-exports.default = connect;
+module.exports = __WEBPACK_EXTERNAL_MODULE__4__;
 
 /***/ }),
 /* 5 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
+module.exports = __WEBPACK_EXTERNAL_MODULE__5__;
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _store = __webpack_require__(2);
-
-var _store2 = _interopRequireDefault(_store);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-exports.default = {
-  keys: _store2.default.keys.bind(_store2.default),
-  get: _store2.default.get.bind(_store2.default),
-  save: _store2.default.set.bind(_store2.default),
-  delete: _store2.default.remove.bind(_store2.default),
-  getAll: function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var items;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              items = _store2.default.getAll();
-              return _context.abrupt("return", Object.values(items));
-
-            case 2:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, undefined);
-    }));
-
-    return function getAll() {
-      return _ref.apply(this, arguments);
-    };
-  }()
-};
+module.exports = __WEBPACK_EXTERNAL_MODULE__6__;
 
 /***/ }),
 /* 7 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.translationsSelector = exports.sharedDocsSelector = undefined;
-
-var _reselect = __webpack_require__(20);
-
-var _i18nJs = __webpack_require__(8);
-
-var _i18nJs2 = _interopRequireDefault(_i18nJs);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var R = __webpack_require__(9);
-var sharedDocsSelector = exports.sharedDocsSelector = function sharedDocsSelector(state) {
-  return state.sharedDocs;
-};
-
-var translationsSelector = exports.translationsSelector = (0, _reselect.createSelector)(sharedDocsSelector, function (sharedDocs) {
-  var newTranslations = R.filter(function (d) {
-    return d.type === "translation";
-  }, sharedDocs);
-  var newTranslationsObj = Object.values(newTranslations).reduce(function (obj, o) {
-    return Object.assign({}, obj, _defineProperty({}, o.lang, o.doc));
-  }, {});
-  var newMergedTranslations = R.mergeDeepRight(_i18nJs2.default.translations, newTranslationsObj);
-  _i18nJs2.default.translations = newMergedTranslations;
-  return newMergedTranslations;
-});
+module.exports = __WEBPACK_EXTERNAL_MODULE__7__;
 
 /***/ }),
 /* 8 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_8__;
+module.exports = __WEBPACK_EXTERNAL_MODULE__8__;
 
 /***/ }),
 /* 9 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_9__;
+module.exports = __WEBPACK_EXTERNAL_MODULE__9__;
 
 /***/ }),
 /* 10 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _navigationMiddleware = __webpack_require__(21);
-
-var _navigationMiddleware2 = _interopRequireDefault(_navigationMiddleware);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = [_navigationMiddleware2.default];
+module.exports = __WEBPACK_EXTERNAL_MODULE__10__;
 
 /***/ }),
 /* 11 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _auth = __webpack_require__(22);
-
-var authActions = _interopRequireWildcard(_auth);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-exports.default = Object.assign({}, authActions);
+module.exports = __WEBPACK_EXTERNAL_MODULE__11__;
 
 /***/ }),
 /* 12 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+__webpack_require__.r(__webpack_exports__);
+var selectors_namespaceObject = {};
+__webpack_require__.r(selectors_namespaceObject);
+__webpack_require__.d(selectors_namespaceObject, "sharedDocsSelector", function() { return sharedDocsSelector; });
+__webpack_require__.d(selectors_namespaceObject, "translationsSelector", function() { return translationsSelector; });
+var auth_namespaceObject = {};
+__webpack_require__.r(auth_namespaceObject);
+__webpack_require__.d(auth_namespaceObject, "skipLogin", function() { return skipLogin; });
+__webpack_require__.d(auth_namespaceObject, "startLoading", function() { return startLoading; });
+__webpack_require__.d(auth_namespaceObject, "userLogin", function() { return userLogin; });
+__webpack_require__.d(auth_namespaceObject, "userLogout", function() { return userLogout; });
 
+// EXTERNAL MODULE: external "react"
+var external_react_ = __webpack_require__(1);
+var external_react_default = /*#__PURE__*/__webpack_require__.n(external_react_);
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+// EXTERNAL MODULE: external "react-dom"
+var external_react_dom_ = __webpack_require__(7);
+
+// EXTERNAL MODULE: external "react-redux"
+var external_react_redux_ = __webpack_require__(6);
+
+// EXTERNAL MODULE: external "uuid"
+var external_uuid_ = __webpack_require__(9);
+var external_uuid_default = /*#__PURE__*/__webpack_require__.n(external_uuid_);
+
+// EXTERNAL MODULE: external "store2"
+var external_store2_ = __webpack_require__(0);
+var external_store2_default = /*#__PURE__*/__webpack_require__.n(external_store2_);
+
+// EXTERNAL MODULE: external "kunafa-client"
+var external_kunafa_client_ = __webpack_require__(2);
+
+// CONCATENATED MODULE: ./src/cacheStore.js
+
+/* harmony default export */ var cacheStore = ({
+  keys: external_store2_default.a.keys.bind(external_store2_default.a),
+  get: external_store2_default.a.get.bind(external_store2_default.a),
+  save: external_store2_default.a.set.bind(external_store2_default.a),
+  delete: external_store2_default.a.remove.bind(external_store2_default.a),
+  getAll: async () => {
+    const items = external_store2_default.a.getAll();
+    return Object.values(items);
+  }
 });
-exports.StaticContent = exports.Authorize = exports.connect = exports.createSsrApp = exports.createApp = undefined;
-
-var _createApp = __webpack_require__(13);
-
-var _createApp2 = _interopRequireDefault(_createApp);
-
-var _createSsrApp = __webpack_require__(23);
-
-var _createSsrApp2 = _interopRequireDefault(_createSsrApp);
-
-var _connect = __webpack_require__(4);
-
-var _connect2 = _interopRequireDefault(_connect);
-
-var _Authorize = __webpack_require__(25);
-
-var _Authorize2 = _interopRequireDefault(_Authorize);
-
-var _StaticContent = __webpack_require__(26);
-
-var _StaticContent2 = _interopRequireDefault(_StaticContent);
-
-var _RKunafa = __webpack_require__(1);
-
-var _RKunafa2 = _interopRequireDefault(_RKunafa);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _RKunafa2.default;
-exports.createApp = _createApp2.default;
-exports.createSsrApp = _createSsrApp2.default;
-exports.connect = _connect2.default;
-exports.Authorize = _Authorize2.default;
-exports.StaticContent = _StaticContent2.default;
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
+// CONCATENATED MODULE: ./src/RKunafa.js
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+const login = (username, password, profileId) => {
+  return cacheStore.save("authCreds", {
+    username,
+    password,
+    profileId
+  });
+};
+
+const logout = (username, password, profileId) => {
+  return cacheStore.delete("authCreds");
+};
+
+const getProfileId = () => {
+  const authCreds = cacheStore.get("authCreds");
+  return authCreds ? authCreds.profileId : undefined;
+};
+
+/* harmony default export */ var RKunafa = ({
+  login,
+  logout,
+  getProfileId
 });
+// EXTERNAL MODULE: external "pouchdb"
+var external_pouchdb_ = __webpack_require__(3);
+var external_pouchdb_default = /*#__PURE__*/__webpack_require__.n(external_pouchdb_);
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+// CONCATENATED MODULE: ./src/startDbSync.js
 
-var _react = __webpack_require__(0);
 
-var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(14);
+/* harmony default export */ var startDbSync = ((HOST, SSL) => {
+  const PROTCOL = SSL === "on" ? "https" : "http";
+  let cachedDBName = undefined;
+  let outSyncHandler = undefined;
+  let inSyncHandler = undefined;
+  let inSyncTimeout = undefined;
+  let sharedSyncHandler = undefined;
+  let errorCount = 0;
 
-var _reactRedux = __webpack_require__(5);
+  const createSyncHandler = async () => {
+    //console.log("Create Sync Handler");
+    const authCreds = external_store2_default.a.get("authCreds");
+    const dbName = authCreds ? authCreds.profileId : "anonymous";
 
-var _uuid = __webpack_require__(15);
+    if (dbName === cachedDBName) {
+      return;
+    }
 
-var _uuid2 = _interopRequireDefault(_uuid);
+    const authenticate = async () => {
+      if (!authCreds) return;
 
-var _store = __webpack_require__(2);
+      try {
+        return await fetch(`${PROTCOL}://${HOST}/_session`, {
+          method: "post",
+          headers: {
+            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+          },
+          credentials: "same-origin",
+          body: `name=${authCreds.username}&password=${authCreds.password}`
+        });
+      } catch (error) {
+        return;
+      }
+    };
 
-var _store2 = _interopRequireDefault(_store);
+    const sessionRes = await authenticate();
 
-var _kunafaClient = __webpack_require__(3);
+    if (!sessionRes) {
+      return; //User is offline
+    }
 
-var _RKunafa = __webpack_require__(1);
+    const localDB = new external_pouchdb_default.a(dbName, {
+      auto_compaction: true
+    });
+    const dbUrl = authCreds ? `${PROTCOL}://${authCreds.username}:${authCreds.password}@${HOST}/db` : `${PROTCOL}://${HOST}/anonymous`;
+    const remoteDB = new external_pouchdb_default.a(dbUrl, {
+      fetch: (url, opts) => {
+        opts.headers.set("X-PouchDB", "true");
+        opts.credentials = "include";
+        return external_pouchdb_default.a.fetch(url, opts);
+      }
+    });
 
-var _RKunafa2 = _interopRequireDefault(_RKunafa);
+    if (outSyncHandler) {
+      outSyncHandler.cancel();
+    }
 
-var _startDbSync = __webpack_require__(16);
+    if (inSyncHandler) {
+      inSyncHandler.cancel();
+    }
 
-var _startDbSync2 = _interopRequireDefault(_startDbSync);
+    if (inSyncTimeout) {
+      clearTimeout(inSyncTimeout);
+    }
 
-var _deviceInfo = __webpack_require__(18);
+    if (dbName === "anonymous") {
+      outSyncHandler = localDB.replicate.to(remoteDB, {
+        live: true,
+        retry: true
+      });
+      cachedDBName = dbName;
+    } else {
+      const onSyncError = async err => {
+        const sessionRes = await authenticate();
 
-var _deviceInfo2 = _interopRequireDefault(_deviceInfo);
+        if (sessionRes && sessionRes.status === 401) {
+          //Unauthorized user
+          RKunafa.logout();
+          location.reload(); //FIXME
+        } else {
+          cachedDBName = undefined; //console.log(err);
 
-var _cacheStore = __webpack_require__(6);
+          if (outSyncHandler) {
+            outSyncHandler.cancel();
+            outSyncHandler = undefined;
+          }
 
-var _cacheStore2 = _interopRequireDefault(_cacheStore);
+          if (inSyncHandler) {
+            inSyncHandler.cancel();
+            inSyncHandler = undefined;
+          }
 
-var _selectors = __webpack_require__(7);
+          if (inSyncTimeout) {
+            clearTimeout(inSyncTimeout);
+            inSyncTimeout = undefined;
+          }
 
-var selectors = _interopRequireWildcard(_selectors);
+          errorCount += 1; //console.log(errorCount);
+        }
+      };
 
-var _middlewares = __webpack_require__(10);
+      const startTime = Date.now();
+      console.log("Initial Replication started at", new Date(startTime));
+      inSyncHandler = localDB.replicate.from(remoteDB).on("denied", onSyncError).on("error", onSyncError).on("complete", () => {
+        const endTime = Date.now();
+        console.log("Initial Replication ended at", new Date(endTime));
+        console.log("Initial load took ", (endTime - startTime) / 1000);
 
-var _middlewares2 = _interopRequireDefault(_middlewares);
+        const replicateFromRemote = () => {
+          if (inSyncHandler) {
+            inSyncHandler.cancel();
+          }
 
-var _actionCreators = __webpack_require__(11);
+          inSyncHandler = localDB.replicate.from(remoteDB).on("denied", onSyncError).on("error", onSyncError).on("complete", () => {
+            inSyncTimeout = setTimeout(replicateFromRemote, 5000);
+          });
+        };
 
-var _actionCreators2 = _interopRequireDefault(_actionCreators);
+        replicateFromRemote();
+        outSyncHandler = localDB.replicate.to(remoteDB, {
+          live: true,
+          retry: true,
+          back_off_function: function back_off_function(delay) {
+            if (delay === 0) {
+              return 1000;
+            }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+            return delay < 5000 ? delay + 1000 : 5000;
+          }
+        }).on("denied", onSyncError).on("error", onSyncError);
+        cachedDBName = dbName;
+      });
+    }
+  }; //setInterval(createSyncHandler, 1000);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+  const localSharedDB = new external_pouchdb_default.a("shared", {
+    auto_compaction: true
+  });
+  const sharedDbUrl = `${PROTCOL}://${HOST}/shared`;
+  const remoteSharedDB = new external_pouchdb_default.a(sharedDbUrl, {
+    fetch: (url, opts) => {
+      opts.headers.set("X-PouchDB", "true");
+      opts.credentials = "include";
+      return external_pouchdb_default.a.fetch(url, opts);
+    }
+  });
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+  const syncShared = async () => {
+    if (sharedSyncHandler) {
+      sharedSyncHandler.cancel();
+    }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+    sharedSyncHandler = localSharedDB.replicate.from(remoteSharedDB).on("error", () => sharedSyncHandler.cancel()).on("paused", () => sharedSyncHandler.cancel());
+  }; // syncShared();
+  // const syncSharedInterval = 1 * 1000 * 60;
+  // setInterval(syncShared, syncSharedInterval);
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+  let mainSyncInterval;
+  let sharedSyncInterval;
+  return {
+    start: async () => {
+      if (mainSyncInterval) {
+        clearInterval(mainSyncInterval);
+      }
 
-var App = function (_Component) {
-  _inherits(App, _Component);
+      await createSyncHandler();
+      mainSyncInterval = setInterval(createSyncHandler, 10000);
 
-  function App() {
-    _classCallCheck(this, App);
+      if (sharedSyncInterval) {
+        clearInterval(sharedSyncInterval);
+      } // await syncShared();
+      // const syncSharedIntervalPeriod = 1 * 1000 * 60;
+      // sharedSyncInterval = setInterval(syncShared, syncSharedIntervalPeriod);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+    },
+    stop: () => {
+      if (mainSyncInterval) {
+        clearInterval(mainSyncInterval);
+      }
+
+      if (sharedSyncInterval) {
+        clearInterval(sharedSyncInterval);
+      }
+
+      if (outSyncHandler) {
+        outSyncHandler.cancel();
+      }
+
+      if (inSyncHandler) {
+        inSyncHandler.cancel();
+      }
+
+      if (inSyncTimeout) {
+        clearTimeout(inSyncTimeout);
+      }
+
+      if (sharedSyncHandler) {
+        sharedSyncHandler.cancel();
+      }
+
+      mainSyncInterval = undefined;
+      sharedSyncInterval = undefined;
+      outSyncHandler = undefined;
+      inSyncHandler = undefined;
+      inSyncTimeout = undefined;
+      sharedSyncHandler = undefined;
+      cachedDBName = undefined;
+    }
+  };
+});
+// EXTERNAL MODULE: external "platform"
+var external_platform_ = __webpack_require__(4);
+var external_platform_default = /*#__PURE__*/__webpack_require__.n(external_platform_);
+
+// CONCATENATED MODULE: ./src/deviceInfo.js
+
+const description = external_platform_default.a.description,
+      layout = external_platform_default.a.layout,
+      ua = external_platform_default.a.ua;
+/* harmony default export */ var deviceInfo = ({
+  description,
+  layout,
+  user_agent: ua,
+  architecture: external_platform_default.a.os.architecture,
+  osFamily: external_platform_default.a.os.family,
+  device_unique_id: "browser_session"
+});
+// EXTERNAL MODULE: external "reselect"
+var external_reselect_ = __webpack_require__(10);
+
+// EXTERNAL MODULE: external "i18n-js"
+var external_i18n_js_ = __webpack_require__(5);
+var external_i18n_js_default = /*#__PURE__*/__webpack_require__.n(external_i18n_js_);
+
+// CONCATENATED MODULE: ./src/selectors.js
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+const R = __webpack_require__(8);
+
+
+const sharedDocsSelector = state => state.sharedDocs;
+const translationsSelector = Object(external_reselect_["createSelector"])(sharedDocsSelector, sharedDocs => {
+  const newTranslations = R.filter(d => d.type === "translation", sharedDocs);
+  const newTranslationsObj = Object.values(newTranslations).reduce((obj, o) => {
+    return _objectSpread({}, obj, {
+      [o.lang]: o.doc
+    });
+  }, {});
+  const newMergedTranslations = R.mergeDeepRight(external_i18n_js_default.a.translations, newTranslationsObj);
+  external_i18n_js_default.a.translations = newMergedTranslations;
+  return newMergedTranslations;
+});
+// CONCATENATED MODULE: ./src/middlewares/navigationMiddleware.js
+const routeToPath = route => {
+  return "/" + route.path.join("/");
+};
+
+const pathToRoute = path => {
+  return {
+    path: path.substr(1).split("/")
+  };
+};
+
+/* harmony default export */ var navigationMiddleware = ((store, config) => next => {
+  const path = document.location.pathname;
+  const route = pathToRoute(path);
+  next(config.actionCreators.goTo(route.path, route.params));
+  window.addEventListener("popstate", function (event) {
+    const state = store.getState();
+
+    if (state.dialog.name) {
+      next(config.actionCreators.closeDialog());
+      const currentRoute = {
+        path: state.history.path
+      };
+      history.pushState(currentRoute, "", routeToPath(currentRoute));
+      return;
+    }
+
+    const path = document.location.pathname;
+    const route = pathToRoute(path);
+    next(config.actionCreators.goTo(route.path, route.params));
+  });
+  return action => {
+    if (action.type === "NAVIGATE_TO") {
+      history.pushState(action.route, "", routeToPath(action.route));
+    }
+
+    if (action.type === "GO_TO" || action.type === "TRANSITE_TO") {
+      history.replaceState(action.route, "", routeToPath(action.route));
+    }
+
+    if (action.type === "RESET_HISTORY") {
+      history.replaceState({}, "", "/");
+    }
+
+    return next(action);
+  };
+});
+// CONCATENATED MODULE: ./src/middlewares/index.js
+
+/* harmony default export */ var middlewares = ([navigationMiddleware]);
+// CONCATENATED MODULE: ./src/actionCreators/auth.js
+
+const skipLogin = () => {
+  return {
+    type: "SKIP_LOGIN"
+  };
+};
+
+const auth_login = async (hostUrl, user) => {
+  const response = await fetch(hostUrl + "/_session", {
+    method: "POST",
+    credentials: "include",
+    body: JSON.stringify(user),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    }
+  });
+
+  if (response.status == 200) {
+    return response.json();
+  } else {
+    console.log(response);
+    throw new Error("Login Error");
+  }
+};
+
+const fetchUser = async (hostUrl, user_id) => {
+  const url = hostUrl + "/_users/" + user_id;
+  const response = await fetch(url, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Accept: "application/json"
+    }
+  });
+
+  if (response.status == 200) {
+    return response.json();
+  } else {
+    throw new Error("Request Error");
+  }
+};
+
+const auth = async (name, password, hostUrl) => {
+  const session = await auth_login(hostUrl, {
+    name,
+    password
+  });
+  const userId = "org.couchdb.user:" + session.name;
+  return await fetchUser(hostUrl, userId);
+};
+
+const startLoading = () => {
+  return {
+    type: "START_LOADING"
+  };
+};
+const userLogin = (name, password, event, {
+  actionCreators,
+  HOST,
+  SSL
+}) => {
+  const PROTCOL = SSL === "on" ? "https" : "http";
+  return async dispatch => {
+    dispatch({
+      type: "START_LOADING"
+    });
+
+    try {
+      const user = await auth(name, password, `${PROTCOL}://${HOST}`);
+      RKunafa.login(name, password, user.profileId);
+
+      if (event) {
+        dispatch(event.action);
+      } else {
+        dispatch(actionCreators.fetchDoc({
+          _id: user.profileId
+        }));
+      }
+
+      dispatch({
+        type: "LOGIN",
+        profileId: user.profileId
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+const userLogout = () => {
+  return dispatch => {
+    dispatch({
+      type: "START_LOADING"
+    });
+    RKunafa.logout();
+    dispatch({
+      type: "LOGOUT"
+    });
+  };
+};
+// CONCATENATED MODULE: ./src/actionCreators/index.js
+function actionCreators_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { actionCreators_defineProperty(target, key, source[key]); }); } return target; }
+
+function actionCreators_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+/* harmony default export */ var src_actionCreators = (actionCreators_objectSpread({}, auth_namespaceObject));
+// CONCATENATED MODULE: ./src/createApp.js
+function createApp_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { createApp_defineProperty(target, key, source[key]); }); } return target; }
+
+function createApp_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class createApp_App extends external_react_["Component"] {
+  render() {
+    const Main = this.props.main;
+    return external_react_default.a.createElement(external_react_redux_["Provider"], {
+      store: this.props.store
+    }, external_react_default.a.createElement(Main, null));
   }
 
-  _createClass(App, [{
-    key: "render",
-    value: function render() {
-      var Main = this.props.main;
-      return _react2.default.createElement(
-        _reactRedux.Provider,
-        { store: this.props.store },
-        _react2.default.createElement(Main, null)
-      );
-    }
-  }]);
+}
 
-  return App;
-}(_react.Component);
+const tabId = external_uuid_default.a.v4();
 
-var tabId = _uuid2.default.v4();
-
-var refreshTabs = function refreshTabs() {
-  var activeTabs = _store2.default.get("activeTabs") || [];
-  var filteredTabs = activeTabs.filter(function (tab) {
-    return tab.id !== tabId && tab.time > Date.now() - 2000;
-  });
-  _store2.default.set("activeTabs", [].concat(_toConsumableArray(filteredTabs), [{
+const refreshTabs = () => {
+  const activeTabs = external_store2_default.a.get("activeTabs") || [];
+  const filteredTabs = activeTabs.filter(tab => tab.id !== tabId && tab.time > Date.now() - 2000);
+  external_store2_default.a.set("activeTabs", [...filteredTabs, {
     id: tabId,
     time: Date.now()
-  }]));
+  }]);
 };
 
 refreshTabs();
 setInterval(refreshTabs, 1000);
 
-var isOpenInOtherTab = function isOpenInOtherTab() {
-  return new Promise(function (resolve, reject) {
-    setTimeout(function () {
-      resolve(_store2.default.get("activeTabs") && _store2.default.get("activeTabs").length > 1);
-    }, 2500);
-  });
-};
+const isOpenInOtherTab = () => new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(external_store2_default.a.get("activeTabs") && external_store2_default.a.get("activeTabs").length > 1);
+  }, 2500);
+});
 
-exports.default = function (name, MAIN, appConfig) {
+/* harmony default export */ var createApp = ((name, MAIN, appConfig) => {
   //startDbSync(appConfig.HOST, appConfig.SSL);
+  const profileId = RKunafa.getProfileId();
 
-  var profileId = _RKunafa2.default.getProfileId();
-
-  var config = Object.assign({
-    profileId: profileId,
-    getLocalDbUrl: function getLocalDbUrl(profileId) {
+  const config = createApp_objectSpread({
+    profileId,
+    getLocalDbUrl: profileId => {
       return profileId || "anonymous";
     },
-    deviceInfo: _deviceInfo2.default,
-    cacheStore: _cacheStore2.default,
-    isConnected: function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return navigator.onLine;
-
-              case 2:
-                return _context.abrupt("return", _context.sent);
-
-              case 3:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, undefined);
-      }));
-
-      return function isConnected() {
-        return _ref.apply(this, arguments);
-      };
-    }(),
+    deviceInfo: deviceInfo,
+    cacheStore: cacheStore,
+    isConnected: async () => {
+      return await navigator.onLine;
+    },
     //startDbSync: () => startDbSync(appConfig.HOST, appConfig.SSL),
-    dbSyncObj: (0, _startDbSync2.default)(appConfig.HOST, appConfig.SSL),
-    isOpenInOtherTab: isOpenInOtherTab
+    dbSyncObj: startDbSync(appConfig.HOST, appConfig.SSL),
+    isOpenInOtherTab
   }, appConfig, {
-    actionCreators: Object.assign({}, appConfig.actionCreators, _actionCreators2.default),
-    selectors: Object.assign({}, appConfig.selectors, selectors),
-    middlewares: appConfig.middlewares ? [].concat(_toConsumableArray(appConfig.middlewares), _toConsumableArray(_middlewares2.default)) : _middlewares2.default
+    actionCreators: createApp_objectSpread({}, appConfig.actionCreators, src_actionCreators),
+    selectors: createApp_objectSpread({}, appConfig.selectors, selectors_namespaceObject),
+    middlewares: appConfig.middlewares ? [...appConfig.middlewares, ...middlewares] : middlewares
   });
 
   if (window.__PRELOADED_STATE__) {
-    var preloadedState = window.__PRELOADED_STATE__;
+    const preloadedState = window.__PRELOADED_STATE__; // Allow the passed state to be garbage-collected
 
-    // Allow the passed state to be garbage-collected
     delete window.__PRELOADED_STATE__;
-
-    var defaultState = preloadedState;
+    let defaultState = preloadedState;
 
     if (profileId) {
-      defaultState = Object.assign({}, preloadedState, {
+      defaultState = createApp_objectSpread({}, preloadedState, {
         currentProfile: {
           _id: profileId
         }
       });
     }
 
-    var AppStore = (0, _kunafaClient.createStore)(config, defaultState);
+    const AppStore = Object(external_kunafa_client_["createStore"])(config, defaultState);
+    Object(external_react_dom_["hydrate"])(external_react_default.a.createElement(createApp_App, {
+      store: AppStore,
+      main: MAIN
+    }), document.getElementById("root"));
 
-    (0, _reactDom.hydrate)(_react2.default.createElement(App, { store: AppStore, main: MAIN }), document.getElementById("root"));
     if (profileId) {
       AppStore.dispatch(AppStore.actions.fetchDoc({
         _id: profileId
@@ -552,921 +767,162 @@ exports.default = function (name, MAIN, appConfig) {
       });
     }
   } else {
-    var _AppStore = (0, _kunafaClient.createStore)(config);
-    (0, _reactDom.render)(_react2.default.createElement(App, { store: _AppStore, main: MAIN }), document.getElementById("root"));
+    const AppStore = Object(external_kunafa_client_["createStore"])(config);
+    Object(external_react_dom_["render"])(external_react_default.a.createElement(createApp_App, {
+      store: AppStore,
+      main: MAIN
+    }), document.getElementById("root"));
   }
-};
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_14__;
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_15__;
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
 });
+// EXTERNAL MODULE: external "react-dom/server"
+var server_ = __webpack_require__(11);
+var server_default = /*#__PURE__*/__webpack_require__.n(server_);
 
-var _pouchdb = __webpack_require__(17);
+// CONCATENATED MODULE: ./src/createSsrApp.js
+function createSsrApp_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { createSsrApp_defineProperty(target, key, source[key]); }); } return target; }
 
-var _pouchdb2 = _interopRequireDefault(_pouchdb);
+function createSsrApp_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var _RKunafa = __webpack_require__(1);
 
-var _RKunafa2 = _interopRequireDefault(_RKunafa);
 
-var _store = __webpack_require__(2);
 
-var _store2 = _interopRequireDefault(_store);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-exports.default = function (HOST, SSL) {
-  var PROTCOL = SSL === "on" ? "https" : "http";
 
-  var cachedDBName = undefined;
-  var outSyncHandler = undefined;
-  var inSyncHandler = undefined;
-  var inSyncTimeout = undefined;
-  var sharedSyncHandler = undefined;
 
-  var errorCount = 0;
-
-  var createSyncHandler = function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-      var authCreds, dbName, authenticate, sessionRes, localDB, dbUrl, remoteDB, onSyncError, startTime;
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              //console.log("Create Sync Handler");
-              authCreds = _store2.default.get("authCreds");
-              dbName = authCreds ? authCreds.profileId : "anonymous";
-
-              if (!(dbName === cachedDBName)) {
-                _context3.next = 4;
-                break;
-              }
-
-              return _context3.abrupt("return");
-
-            case 4:
-              authenticate = function () {
-                var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                  return regeneratorRuntime.wrap(function _callee$(_context) {
-                    while (1) {
-                      switch (_context.prev = _context.next) {
-                        case 0:
-                          if (authCreds) {
-                            _context.next = 2;
-                            break;
-                          }
-
-                          return _context.abrupt("return");
-
-                        case 2:
-                          _context.prev = 2;
-                          _context.next = 5;
-                          return fetch(PROTCOL + "://" + HOST + "/_session", {
-                            method: "post",
-                            headers: {
-                              "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
-                            },
-                            credentials: "same-origin",
-                            body: "name=" + authCreds.username + "&password=" + authCreds.password
-                          });
-
-                        case 5:
-                          return _context.abrupt("return", _context.sent);
-
-                        case 8:
-                          _context.prev = 8;
-                          _context.t0 = _context["catch"](2);
-                          return _context.abrupt("return");
-
-                        case 11:
-                        case "end":
-                          return _context.stop();
-                      }
-                    }
-                  }, _callee, undefined, [[2, 8]]);
-                }));
-
-                return function authenticate() {
-                  return _ref2.apply(this, arguments);
-                };
-              }();
-
-              _context3.next = 7;
-              return authenticate();
-
-            case 7:
-              sessionRes = _context3.sent;
-
-              if (sessionRes) {
-                _context3.next = 10;
-                break;
-              }
-
-              return _context3.abrupt("return");
-
-            case 10:
-              localDB = new _pouchdb2.default(dbName, { auto_compaction: true });
-              dbUrl = authCreds ? PROTCOL + "://" + authCreds.username + ":" + authCreds.password + "@" + HOST + "/db" : PROTCOL + "://" + HOST + "/anonymous";
-              remoteDB = new _pouchdb2.default(dbUrl, {
-                fetch: function fetch(url, opts) {
-                  opts.headers.set("X-PouchDB", "true");
-                  opts.credentials = "include";
-                  return _pouchdb2.default.fetch(url, opts);
-                }
-              });
-
-
-              if (outSyncHandler) {
-                outSyncHandler.cancel();
-              }
-              if (inSyncHandler) {
-                inSyncHandler.cancel();
-              }
-              if (inSyncTimeout) {
-                clearTimeout(inSyncTimeout);
-              }
-
-              if (dbName === "anonymous") {
-                outSyncHandler = localDB.replicate.to(remoteDB, {
-                  live: true,
-                  retry: true
-                });
-                cachedDBName = dbName;
-              } else {
-                onSyncError = function () {
-                  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(err) {
-                    var sessionRes;
-                    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                      while (1) {
-                        switch (_context2.prev = _context2.next) {
-                          case 0:
-                            _context2.next = 2;
-                            return authenticate();
-
-                          case 2:
-                            sessionRes = _context2.sent;
-
-
-                            if (sessionRes && sessionRes.status === 401) {
-                              //Unauthorized user
-                              _RKunafa2.default.logout();
-                              location.reload(); //FIXME
-                            } else {
-                              cachedDBName = undefined;
-                              //console.log(err);
-                              if (outSyncHandler) {
-                                outSyncHandler.cancel();
-                                outSyncHandler = undefined;
-                              }
-                              if (inSyncHandler) {
-                                inSyncHandler.cancel();
-                                inSyncHandler = undefined;
-                              }
-                              if (inSyncTimeout) {
-                                clearTimeout(inSyncTimeout);
-                                inSyncTimeout = undefined;
-                              }
-                              errorCount += 1;
-                              //console.log(errorCount);
-                            }
-
-                          case 4:
-                          case "end":
-                            return _context2.stop();
-                        }
-                      }
-                    }, _callee2, undefined);
-                  }));
-
-                  return function onSyncError(_x) {
-                    return _ref3.apply(this, arguments);
-                  };
-                }();
-
-                startTime = Date.now();
-
-                console.log("Initial Replication started at", new Date(startTime));
-                inSyncHandler = localDB.replicate.from(remoteDB).on("denied", onSyncError).on("error", onSyncError).on("complete", function () {
-                  var endTime = Date.now();
-                  console.log("Initial Replication ended at", new Date(endTime));
-                  console.log("Initial load took ", (endTime - startTime) / 1000);
-
-                  var replicateFromRemote = function replicateFromRemote() {
-                    if (inSyncHandler) {
-                      inSyncHandler.cancel();
-                    }
-                    inSyncHandler = localDB.replicate.from(remoteDB).on("denied", onSyncError).on("error", onSyncError).on("complete", function () {
-                      inSyncTimeout = setTimeout(replicateFromRemote, 5000);
-                    });
-                  };
-                  replicateFromRemote();
-
-                  outSyncHandler = localDB.replicate.to(remoteDB, {
-                    live: true,
-                    retry: true,
-                    back_off_function: function back_off_function(delay) {
-                      if (delay === 0) {
-                        return 1000;
-                      }
-                      return delay < 5000 ? delay + 1000 : 5000;
-                    }
-                  }).on("denied", onSyncError).on("error", onSyncError);
-
-                  cachedDBName = dbName;
-                });
-              }
-
-            case 17:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3, undefined);
-    }));
-
-    return function createSyncHandler() {
-      return _ref.apply(this, arguments);
-    };
-  }();
-
-  //setInterval(createSyncHandler, 1000);
-
-  var localSharedDB = new _pouchdb2.default("shared", { auto_compaction: true });
-  var sharedDbUrl = PROTCOL + "://" + HOST + "/shared";
-  var remoteSharedDB = new _pouchdb2.default(sharedDbUrl, {
-    fetch: function fetch(url, opts) {
-      opts.headers.set("X-PouchDB", "true");
-      opts.credentials = "include";
-      return _pouchdb2.default.fetch(url, opts);
-    }
-  });
-
-  var syncShared = function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              if (sharedSyncHandler) {
-                sharedSyncHandler.cancel();
-              }
-              sharedSyncHandler = localSharedDB.replicate.from(remoteSharedDB).on("error", function () {
-                return sharedSyncHandler.cancel();
-              }).on("paused", function () {
-                return sharedSyncHandler.cancel();
-              });
-
-            case 2:
-            case "end":
-              return _context4.stop();
-          }
-        }
-      }, _callee4, undefined);
-    }));
-
-    return function syncShared() {
-      return _ref4.apply(this, arguments);
-    };
-  }();
-
-  // syncShared();
-  // const syncSharedInterval = 1 * 1000 * 60;
-  // setInterval(syncShared, syncSharedInterval);
-
-  var mainSyncInterval = void 0;
-  var sharedSyncInterval = void 0;
-
-  return {
-    start: function () {
-      var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-        return regeneratorRuntime.wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                if (mainSyncInterval) {
-                  clearInterval(mainSyncInterval);
-                }
-                _context5.next = 3;
-                return createSyncHandler();
-
-              case 3:
-                mainSyncInterval = setInterval(createSyncHandler, 10000);
-
-                if (sharedSyncInterval) {
-                  clearInterval(sharedSyncInterval);
-                }
-                // await syncShared();
-                // const syncSharedIntervalPeriod = 1 * 1000 * 60;
-                // sharedSyncInterval = setInterval(syncShared, syncSharedIntervalPeriod);
-
-              case 5:
-              case "end":
-                return _context5.stop();
-            }
-          }
-        }, _callee5, undefined);
-      }));
-
-      return function start() {
-        return _ref5.apply(this, arguments);
-      };
-    }(),
-    stop: function stop() {
-      if (mainSyncInterval) {
-        clearInterval(mainSyncInterval);
-      }
-      if (sharedSyncInterval) {
-        clearInterval(sharedSyncInterval);
-      }
-      if (outSyncHandler) {
-        outSyncHandler.cancel();
-      }
-      if (inSyncHandler) {
-        inSyncHandler.cancel();
-      }
-      if (inSyncTimeout) {
-        clearTimeout(inSyncTimeout);
-      }
-      if (sharedSyncHandler) {
-        sharedSyncHandler.cancel();
-      }
-      mainSyncInterval = undefined;
-      sharedSyncInterval = undefined;
-      outSyncHandler = undefined;
-      inSyncHandler = undefined;
-      inSyncTimeout = undefined;
-      sharedSyncHandler = undefined;
-      cachedDBName = undefined;
-    }
-  };
-};
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_17__;
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _platform = __webpack_require__(19);
-
-var _platform2 = _interopRequireDefault(_platform);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var description = _platform2.default.description,
-    layout = _platform2.default.layout,
-    ua = _platform2.default.ua;
-exports.default = {
-  description: description,
-  layout: layout,
-  user_agent: ua,
-  architecture: _platform2.default.os.architecture,
-  osFamily: _platform2.default.os.family,
-  device_unique_id: "browser_session"
-};
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_19__;
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_20__;
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var routeToPath = function routeToPath(route) {
-  return "/" + route.path.join("/");
-};
-
-var pathToRoute = function pathToRoute(path) {
-  return {
-    path: path.substr(1).split("/")
-  };
-};
-
-exports.default = function (store, config) {
-  return function (next) {
-    var path = document.location.pathname;
-    var route = pathToRoute(path);
-    next(config.actionCreators.goTo(route.path, route.params));
-    window.addEventListener("popstate", function (event) {
-      var state = store.getState();
-      if (state.dialog.name) {
-        next(config.actionCreators.closeDialog());
-        var currentRoute = {
-          path: state.history.path
-        };
-        history.pushState(currentRoute, "", routeToPath(currentRoute));
-        return;
-      }
-
-      var path = document.location.pathname;
-      var route = pathToRoute(path);
-      next(config.actionCreators.goTo(route.path, route.params));
-    });
-    return function (action) {
-      if (action.type === "NAVIGATE_TO") {
-        history.pushState(action.route, "", routeToPath(action.route));
-      }
-      if (action.type === "GO_TO" || action.type === "TRANSITE_TO") {
-        history.replaceState(action.route, "", routeToPath(action.route));
-      }
-      if (action.type === "RESET_HISTORY") {
-        history.replaceState({}, "", "/");
-      }
-      return next(action);
-    };
-  };
-};
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.userLogout = exports.userLogin = exports.startLoading = exports.skipLogin = undefined;
-
-var _RKunafa = __webpack_require__(1);
-
-var _RKunafa2 = _interopRequireDefault(_RKunafa);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var skipLogin = exports.skipLogin = function skipLogin() {
-  return {
-    type: "SKIP_LOGIN"
-  };
-};
-
-var login = function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(hostUrl, user) {
-    var response;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.next = 2;
-            return fetch(hostUrl + "/_session", {
-              method: "POST",
-              credentials: "include",
-              body: JSON.stringify(user),
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-              }
-            });
-
-          case 2:
-            response = _context.sent;
-
-            if (!(response.status == 200)) {
-              _context.next = 7;
-              break;
-            }
-
-            return _context.abrupt("return", response.json());
-
-          case 7:
-            console.log(response);
-            throw new Error("Login Error");
-
-          case 9:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee, undefined);
-  }));
-
-  return function login(_x, _x2) {
-    return _ref.apply(this, arguments);
-  };
-}();
-
-var fetchUser = function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(hostUrl, user_id) {
-    var url, response;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            url = hostUrl + "/_users/" + user_id;
-            _context2.next = 3;
-            return fetch(url, {
-              method: "GET",
-              credentials: "include",
-              headers: {
-                Accept: "application/json"
-              }
-            });
-
-          case 3:
-            response = _context2.sent;
-
-            if (!(response.status == 200)) {
-              _context2.next = 8;
-              break;
-            }
-
-            return _context2.abrupt("return", response.json());
-
-          case 8:
-            throw new Error("Request Error");
-
-          case 9:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2, undefined);
-  }));
-
-  return function fetchUser(_x3, _x4) {
-    return _ref2.apply(this, arguments);
-  };
-}();
-
-var auth = function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(name, password, hostUrl) {
-    var session, userId;
-    return regeneratorRuntime.wrap(function _callee3$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
-            _context3.next = 2;
-            return login(hostUrl, {
-              name: name,
-              password: password
-            });
-
-          case 2:
-            session = _context3.sent;
-            userId = "org.couchdb.user:" + session.name;
-            _context3.next = 6;
-            return fetchUser(hostUrl, userId);
-
-          case 6:
-            return _context3.abrupt("return", _context3.sent);
-
-          case 7:
-          case "end":
-            return _context3.stop();
-        }
-      }
-    }, _callee3, undefined);
-  }));
-
-  return function auth(_x5, _x6, _x7) {
-    return _ref3.apply(this, arguments);
-  };
-}();
-
-var startLoading = exports.startLoading = function startLoading() {
-  return {
-    type: "START_LOADING"
-  };
-};
-
-var userLogin = exports.userLogin = function userLogin(name, password, event, _ref4) {
-  var actionCreators = _ref4.actionCreators,
-      HOST = _ref4.HOST,
-      SSL = _ref4.SSL;
-
-  var PROTCOL = SSL === "on" ? "https" : "http";
-  return function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch) {
-      var user;
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              dispatch({
-                type: "START_LOADING"
-              });
-              _context4.prev = 1;
-              _context4.next = 4;
-              return auth(name, password, PROTCOL + "://" + HOST);
-
-            case 4:
-              user = _context4.sent;
-
-              _RKunafa2.default.login(name, password, user.profileId);
-              if (event) {
-                dispatch(event.action);
-              } else {
-                dispatch(actionCreators.fetchDoc({
-                  _id: user.profileId
-                }));
-              }
-              dispatch({
-                type: "LOGIN",
-                profileId: user.profileId
-              });
-              _context4.next = 13;
-              break;
-
-            case 10:
-              _context4.prev = 10;
-              _context4.t0 = _context4["catch"](1);
-
-              console.log(_context4.t0);
-
-            case 13:
-            case "end":
-              return _context4.stop();
-          }
-        }
-      }, _callee4, undefined, [[1, 10]]);
-    }));
-
-    return function (_x8) {
-      return _ref5.apply(this, arguments);
-    };
-  }();
-};
-
-var userLogout = exports.userLogout = function userLogout() {
-  return function (dispatch) {
-    dispatch({
-      type: "START_LOADING"
-    });
-    _RKunafa2.default.logout();
-    dispatch({
-      type: "LOGOUT"
-    });
-  };
-};
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _server = __webpack_require__(24);
-
-var _server2 = _interopRequireDefault(_server);
-
-var _reactRedux = __webpack_require__(5);
-
-var _kunafaClient = __webpack_require__(3);
-
-var _selectors = __webpack_require__(7);
-
-var selectors = _interopRequireWildcard(_selectors);
-
-var _middlewares = __webpack_require__(10);
-
-var _middlewares2 = _interopRequireDefault(_middlewares);
-
-var _actionCreators = __webpack_require__(11);
-
-var _actionCreators2 = _interopRequireDefault(_actionCreators);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var App = function (_Component) {
-  _inherits(App, _Component);
-
-  function App() {
-    _classCallCheck(this, App);
-
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+class createSsrApp_App extends external_react_["Component"] {
+  render() {
+    const Main = this.props.main;
+    return external_react_default.a.createElement(external_react_redux_["Provider"], {
+      store: this.props.store
+    }, external_react_default.a.createElement(Main, null));
   }
 
-  _createClass(App, [{
-    key: "render",
-    value: function render() {
-      var Main = this.props.main;
-      return _react2.default.createElement(
-        _reactRedux.Provider,
-        { store: this.props.store },
-        _react2.default.createElement(Main, null)
-      );
-    }
-  }]);
+}
 
-  return App;
-}(_react.Component);
-
-exports.default = function (name, MAIN, appConfig) {
-  var config = Object.assign({
-    getLocalDbUrl: function getLocalDbUrl(profileId) {
+/* harmony default export */ var createSsrApp = ((name, MAIN, appConfig) => {
+  const config = createSsrApp_objectSpread({
+    getLocalDbUrl: profileId => {
       return profileId || "anonymous";
     },
     ssr: true
   }, appConfig, {
-    actionCreators: Object.assign({}, appConfig.actionCreators, _actionCreators2.default),
-    selectors: Object.assign({}, appConfig.selectors, selectors),
-    middlewares: [].concat(_toConsumableArray(appConfig.middlewares), _toConsumableArray(_middlewares2.default))
+    actionCreators: createSsrApp_objectSpread({}, appConfig.actionCreators, src_actionCreators),
+    selectors: createSsrApp_objectSpread({}, appConfig.selectors, selectors_namespaceObject),
+    middlewares: [...appConfig.middlewares, ...middlewares]
   });
 
-  var AppStore = (0, _kunafaClient.createStore)(config);
-
+  const AppStore = Object(external_kunafa_client_["createStore"])(config);
   return {
-    getHtml: function getHtml() {
-      return _server2.default.renderToString(_react2.default.createElement(App, { store: AppStore, main: MAIN }));
-    },
+    getHtml: () => server_default.a.renderToString(external_react_default.a.createElement(createSsrApp_App, {
+      store: AppStore,
+      main: MAIN
+    })),
     store: AppStore
   };
+});
+// CONCATENATED MODULE: ./src/connect.js
+function connect_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { connect_defineProperty(target, key, source[key]); }); } return target; }
+
+function connect_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+const connect = (mapStateToProps, mapDispatchToProps) => component => {
+  return Object(external_kunafa_client_["connect"])((state, ownProps) => {
+    const translations = ownProps.selectors.translationsSelector ? ownProps.selectors.translationsSelector(state) : external_i18n_js_default.a.translations;
+
+    if (mapStateToProps) {
+      return connect_objectSpread({}, mapStateToProps(state, ownProps), {
+        translations
+      });
+    } else {
+      return {
+        translations
+      };
+    }
+  }, mapDispatchToProps)(component);
 };
 
-/***/ }),
-/* 24 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_24__;
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
+/* harmony default export */ var src_connect = (connect);
+// CONCATENATED MODULE: ./src/Authorize.js
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 
-var _react = __webpack_require__(0);
+const Authorize_R = __webpack_require__(8);
 
-var _react2 = _interopRequireDefault(_react);
-
-var _connect = __webpack_require__(4);
-
-var _connect2 = _interopRequireDefault(_connect);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var R = __webpack_require__(9);
-
-var Authorize = function Authorize(_ref) {
-  var children = _ref.children,
-      allow = _ref.allow,
-      loggedIn = _ref.loggedIn,
-      currentProfile = _ref.currentProfile,
-      renderWhenNotAuthorized = _ref.renderWhenNotAuthorized,
-      renderWhenNotLoggedIn = _ref.renderWhenNotLoggedIn;
-
+const Authorize = ({
+  children,
+  allow,
+  loggedIn,
+  currentProfile,
+  renderWhenNotAuthorized,
+  renderWhenNotLoggedIn
+}) => {
   if (!loggedIn) {
     return renderWhenNotLoggedIn ? renderWhenNotLoggedIn() : renderWhenNotAuthorized ? renderWhenNotAuthorized() : null;
   }
-  var allowedRoles = allow || ["user"];
-  var roles = currentProfile.roles ? ["user"].concat(_toConsumableArray(currentProfile.roles)) : ["user"];
-  if (roles.includes("admin") || R.intersection(allowedRoles, roles).length > 0) {
+
+  const allowedRoles = allow || ["user"];
+  const roles = currentProfile.roles ? ["user", ...currentProfile.roles] : ["user"];
+
+  if (roles.includes("admin") || Authorize_R.intersection(allowedRoles, roles).length > 0) {
     return children;
   }
+
   return renderWhenNotAuthorized ? renderWhenNotAuthorized() : null;
 };
 
-exports.default = (0, _connect2.default)(function (state, _ref2) {
-  var selectors = _ref2.selectors;
-
+/* harmony default export */ var src_Authorize = (src_connect((state, {
+  selectors
+}) => {
   return {
     loggedIn: selectors.currentUserIdSelector(state) !== undefined,
     currentProfile: selectors.currentUserProfileSelector(state)
   };
-})(Authorize);
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
+})(Authorize));
+// CONCATENATED MODULE: ./src/StaticContent.js
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _connect = __webpack_require__(4);
-
-var _connect2 = _interopRequireDefault(_connect);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var StaticContent = function (_Component) {
-  _inherits(StaticContent, _Component);
-
-  function StaticContent() {
-    _classCallCheck(this, StaticContent);
-
-    return _possibleConstructorReturn(this, (StaticContent.__proto__ || Object.getPrototypeOf(StaticContent)).apply(this, arguments));
+class StaticContent_StaticContent extends external_react_["Component"] {
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.route !== nextProps.route) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  _createClass(StaticContent, [{
-    key: "shouldComponentUpdate",
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (this.props.route !== nextProps.route) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return this.props.children;
-    }
-  }]);
+  render() {
+    return this.props.children;
+  }
 
-  return StaticContent;
-}(_react.Component);
+}
 
-exports.default = (0, _connect2.default)(function (state, _ref) {
-  var selectors = _ref.selectors;
-
+/* harmony default export */ var src_StaticContent = (src_connect((state, {
+  selectors
+}) => {
   return {
     route: state.history
   };
-})(StaticContent);
+})(StaticContent_StaticContent));
+// CONCATENATED MODULE: ./src/index.js
+/* concated harmony reexport createApp */__webpack_require__.d(__webpack_exports__, "createApp", function() { return createApp; });
+/* concated harmony reexport createSsrApp */__webpack_require__.d(__webpack_exports__, "createSsrApp", function() { return createSsrApp; });
+/* concated harmony reexport connect */__webpack_require__.d(__webpack_exports__, "connect", function() { return src_connect; });
+/* concated harmony reexport Authorize */__webpack_require__.d(__webpack_exports__, "Authorize", function() { return src_Authorize; });
+/* concated harmony reexport StaticContent */__webpack_require__.d(__webpack_exports__, "StaticContent", function() { return src_StaticContent; });
+
+
+
+
+
+
+/* harmony default export */ var src = __webpack_exports__["default"] = (RKunafa);
+
 
 /***/ })
 /******/ ]);

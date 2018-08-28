@@ -1,7 +1,12 @@
 {
-  "presets": ["env", "react"],
-  "plugins": [
-    "transform-async-to-generator",
-    ["transform-object-rest-spread", { "useBuiltIns": true }]
-  ]
+  "presets": [
+    ["@babel/env", {
+      "targets": {
+        "browsers": ["last 2 versions", "not last 2 Explorer versions", "not last 2 Android versions"],
+        "node": "current"
+      }
+    }],
+		"@babel/react"
+	],
+  "plugins": ["@babel/plugin-proposal-object-rest-spread"]
 }
