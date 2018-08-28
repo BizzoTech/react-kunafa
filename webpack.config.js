@@ -6,8 +6,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: "/",
     library: 'reactKunafa',
-    libraryTarget: 'umd',
-    umdNamedDefine: true,
+    libraryTarget: 'commonjs2',
     filename: 'js/react-kunafa.bundle.js'
   },
   mode: 'production',

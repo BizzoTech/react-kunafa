@@ -1,14 +1,5 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("store2"), require("react"), require("kunafa-client"), require("pouchdb"), require("platform"), require("i18n-js"), require("react-redux"), require("react-dom"), require("ramda"), require("uuid"), require("reselect"), require("react-dom/server"));
-	else if(typeof define === 'function' && define.amd)
-		define("reactKunafa", ["store2", "react", "kunafa-client", "pouchdb", "platform", "i18n-js", "react-redux", "react-dom", "ramda", "uuid", "reselect", "react-dom/server"], factory);
-	else if(typeof exports === 'object')
-		exports["reactKunafa"] = factory(require("store2"), require("react"), require("kunafa-client"), require("pouchdb"), require("platform"), require("i18n-js"), require("react-redux"), require("react-dom"), require("ramda"), require("uuid"), require("reselect"), require("react-dom/server"));
-	else
-		root["reactKunafa"] = factory(root["store2"], root["react"], root["kunafa-client"], root["pouchdb"], root["platform"], root["i18n-js"], root["react-redux"], root["react-dom"], root["ramda"], root["uuid"], root["reselect"], root["react-dom/server"]);
-})(window, function(__WEBPACK_EXTERNAL_MODULE__0__, __WEBPACK_EXTERNAL_MODULE__1__, __WEBPACK_EXTERNAL_MODULE__2__, __WEBPACK_EXTERNAL_MODULE__3__, __WEBPACK_EXTERNAL_MODULE__4__, __WEBPACK_EXTERNAL_MODULE__5__, __WEBPACK_EXTERNAL_MODULE__6__, __WEBPACK_EXTERNAL_MODULE__7__, __WEBPACK_EXTERNAL_MODULE__8__, __WEBPACK_EXTERNAL_MODULE__9__, __WEBPACK_EXTERNAL_MODULE__10__, __WEBPACK_EXTERNAL_MODULE__11__) {
-return /******/ (function(modules) { // webpackBootstrap
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -98,73 +89,73 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 0 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__0__;
+module.exports = require("store2");
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__1__;
+module.exports = require("react");
 
 /***/ }),
 /* 2 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__2__;
+module.exports = require("kunafa-client");
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__3__;
+module.exports = require("pouchdb");
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__4__;
+module.exports = require("platform");
 
 /***/ }),
 /* 5 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__5__;
+module.exports = require("i18n-js");
 
 /***/ }),
 /* 6 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__6__;
+module.exports = require("react-redux");
 
 /***/ }),
 /* 7 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__7__;
+module.exports = require("react-dom");
 
 /***/ }),
 /* 8 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__8__;
+module.exports = require("ramda");
 
 /***/ }),
 /* 9 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__9__;
+module.exports = require("uuid");
 
 /***/ }),
 /* 10 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__10__;
+module.exports = require("reselect");
 
 /***/ }),
 /* 11 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__11__;
+module.exports = require("react-dom/server");
 
 /***/ }),
 /* 12 */
@@ -926,4 +917,3 @@ class StaticContent_StaticContent extends external_react_["Component"] {
 
 /***/ })
 /******/ ]);
-});
